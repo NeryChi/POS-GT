@@ -1,0 +1,4 @@
+.brd_redondo, .btn_aceptar{
+    -fx-background-radius: 10em;
+    -fx-border-radius: 10em;
+}
