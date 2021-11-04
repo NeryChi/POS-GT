@@ -4,22 +4,30 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="503.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.LogInCont">
+<AnchorPane prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/log_in.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.LogInCont">
    <children>
-      <TextField layoutX="50.0" layoutY="226.0" prefHeight="35.0" prefWidth="277.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-      <TextField layoutX="50.0" layoutY="343.0" prefHeight="35.0" prefWidth="277.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-      <Button layoutX="237.0" layoutY="428.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Button" AnchorPane.rightAnchor="50.0" />
-      <Label layoutX="50.0" layoutY="437.0" text="Acerca de..." AnchorPane.leftAnchor="50.0" />
-      <Label layoutX="50.0" layoutY="198.0" text="Usuario" />
-      <Label layoutX="50.0" layoutY="314.0" text="Contraseña" />
-      <Pane layoutX="111.0" layoutY="54.0" prefHeight="118.0" prefWidth="171.0">
+      <Pane layoutY="443.0" prefHeight="136.0" prefWidth="504.0" styleClass="svg-claro" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane layoutX="80.0" layoutY="376.0" prefHeight="100.0" styleClass="svg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <FlowPane layoutX="8.0" layoutY="24.0" prefHeight="180.0" prefWidth="504.0" styleClass="centrado" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="83.0" fitWidth="158.0" layoutX="5.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="83.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/logo.png" />
                </image>
             </ImageView>
          </children>
-      </Pane>
+      </FlowPane>
+      <FlowPane layoutY="187.0" prefHeight="323.0" prefWidth="500.0" styleClass="centrado" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Pane prefHeight="329.0" prefWidth="344.0">
+               <children>
+                  <TextField layoutY="30.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" />
+                  <PasswordField layoutY="150.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" />
+                  <Label styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Usuario" />
+                  <Label layoutY="120.0" styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Contraseña" />
+                  <Button layoutX="205.0" layoutY="275.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" />
+               </children>
+            </Pane>
+         </children></FlowPane>
    </children>
 </AnchorPane>
