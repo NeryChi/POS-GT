@@ -14,12 +14,14 @@ public class Main extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("");
-        Image icon = new Image(getClass().getResourceAsStream("/img/logo.png"));
+        stage.setTitle("POS GT");
+        Image icon = new Image(getClass().getResourceAsStream("/img/p.png"));
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
         }
+
+
 
     public static void main(String[] args) {
         launch();
