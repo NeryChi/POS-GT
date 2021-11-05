@@ -1,0 +1,25 @@
+.principal{
+    -fx-background-color: #FFFFFF;
+}
+.brd_redondo_left{
+    -fx-background-color: #ffff;
+    -fx-border-color: #292B39;
+    -fx-border-radius: 17em 0em 0em 17em;
+    -fx-background-radius: 17em 0em 0em 17em;
+    -fx-text-fill: #292B39;
+}
+
+.brd_redondo_rigth{
+    -fx-background-color: #FF007F;
+    -fx-border-color: #292B39;
+    -fx-background-radius: 0em 17em 17em 0em;
+    -fx-border-radius: 0em 17em 17em 0em;
+}
+
+.brd_redondo_rigth:hover{
+    -fx-background-color: #292B39;
+}
+
+.brd_redondo_rigth:pressed{
+    -fx-background-color: #FFBFDF;
+}
