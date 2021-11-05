@@ -1,33 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/log_in.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.LogInCont">
+<AnchorPane fx:id="lienzo" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/log_in.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.LogInCont">
    <children>
-      <Pane layoutY="443.0" prefHeight="136.0" prefWidth="504.0" styleClass="svg-claro" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Pane layoutX="80.0" layoutY="376.0" prefHeight="100.0" styleClass="svg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <FlowPane layoutX="8.0" layoutY="24.0" prefHeight="180.0" prefWidth="504.0" styleClass="centrado" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutY="443.0" prefHeight="136.0" prefWidth="504.0" styleClass="adorno_claro" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane layoutX="80.0" layoutY="376.0" prefHeight="100.0" styleClass="adorno_rosa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane fx:id="campos_anchor" layoutX="320.0" layoutY="169.0" prefHeight="322.0" prefWidth="360.0" styleClass="centrado" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="83.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/logo.png" />
-               </image>
-            </ImageView>
+            <TextField layoutY="27.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <PasswordField layoutY="141.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Usuario" />
+            <Label fx:id="prueba_texto" layoutY="112.0" styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Contraseña" />
+            <Button layoutX="282.0" layoutY="273.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <FlowPane prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="93.0" prefWidth="732.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" rotate="180.0" styleClass="p_oscura" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="189.0" layoutY="58.0" prefHeight="142.0" prefWidth="186.0" rotate="180.0" styleClass="os" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="58.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="389.0" layoutY="84.0" prefHeight="183.0" prefWidth="178.0" rotate="180.0" styleClass="g" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="-67.0" AnchorPane.topAnchor="84.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="542.0" prefHeight="200.0" prefWidth="193.0" rotate="180.0" styleClass="t" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" styleClass="p_clara" />
+               </children>
+            </AnchorPane>
          </children>
       </FlowPane>
-      <FlowPane layoutY="187.0" prefHeight="323.0" prefWidth="500.0" styleClass="centrado" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Pane prefHeight="329.0" prefWidth="344.0">
-               <children>
-                  <TextField layoutY="30.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" />
-                  <PasswordField layoutY="150.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" />
-                  <Label styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Usuario" />
-                  <Label layoutY="120.0" styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Contraseña" />
-                  <Button layoutX="205.0" layoutY="275.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" />
-               </children>
-            </Pane>
-         </children></FlowPane>
    </children>
 </AnchorPane>
