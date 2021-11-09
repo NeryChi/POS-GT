@@ -12,9 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("nuevo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("POS GT");
+        stage.setTitle("Punto de Ventas - POS GT");
         Image icon = new Image(getClass().getResourceAsStream("/img/p.png"));
         stage.getIcons().add(icon);
         stage.setScene(scene);
