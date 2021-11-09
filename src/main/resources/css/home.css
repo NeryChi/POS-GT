@@ -15,6 +15,8 @@
     -fx-border-color: #292B39;
     -fx-background-radius: 0em 17em 17em 0em;
     -fx-border-radius: 0em 17em 17em 0em;
+    -fx-end-margin: 0px;
+    -fx-start-margin: 0px;
 }
 
 .brd_redondo_rigth:hover{
@@ -51,8 +53,6 @@
     -fx-text-fill: #292B39;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
 }
 
 .texto_simple {
@@ -60,30 +60,8 @@
     -fx-font-size: 15px;
 }
 
-.btn_borrar{
-    -fx-text-fill: #292B39;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-}
-
-.btn_borrar:hover{
-    -fx-text-fill: #FF007F;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-}
-
 .borde_sub{
     -fx-background-color: transparent;
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: #292B39;
-}
-
-.borde_sub2{
-    -fx-background-color: transparent;
-    -fx-border-width: 0px 0px 2px 0px;
-    -fx-border-color: #ffffff;
 }
