@@ -11,6 +11,7 @@
 
 .brd_redondo_rigth{
     -fx-background-color: #FF007F;
+    -fx-background-size: 0px;
     -fx-border-color: #292B39;
     -fx-background-radius: 0em 17em 17em 0em;
     -fx-border-radius: 0em 17em 17em 0em;
@@ -23,3 +24,43 @@
 .brd_redondo_rigth:pressed{
     -fx-background-color: #FFBFDF;
 }
+
+.btn_aceptar{
+    -fx-background-radius: 10em;
+    -fx-border-radius: 10em;
+    -fx-text-fill: #ffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-color: #292B39;
+    -fx-border-color: #292B39;
+    -fx-background-size: 0px;
+}
+
+.btn_cancelar{
+    -fx-background-radius: 10em;
+    -fx-border-radius: 10em;
+    -fx-text-fill: #292B39;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #292B39;
+    -fx-background-size: 0px;
+}
+
+.texto {
+    -fx-text-fill: #292B39;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.texto_simple {
+    -fx-text-fill: #292B39;
+    -fx-font-size: 15px;
+}
+
+.borde_sub{
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #292B39;
+}
+
