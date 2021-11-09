@@ -51,11 +51,29 @@
     -fx-text-fill: #292B39;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .texto_simple {
     -fx-text-fill: #292B39;
     -fx-font-size: 15px;
+}
+
+.btn_borrar{
+    -fx-text-fill: #292B39;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.btn_borrar:hover{
+    -fx-text-fill: #FF007F;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .borde_sub{
@@ -64,3 +82,8 @@
     -fx-border-color: #292B39;
 }
 
+.borde_sub2{
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #ffffff;
+}
