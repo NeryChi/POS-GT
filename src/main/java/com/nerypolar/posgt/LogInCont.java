@@ -34,7 +34,6 @@ public class LogInCont implements Initializable {
 
 
         float ancho = (int) lienzo.getPrefWidth();
-        prueba_texto.setText(String.valueOf(ancho));
         campos_anchor.setPrefWidth(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
         campos_anchor.setTranslateX(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
 

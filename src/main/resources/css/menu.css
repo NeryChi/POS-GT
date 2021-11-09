@@ -1,0 +1,17 @@
+.VBox{
+    -fx-background-color: #292B39;
+}
+
+.button{
+    -fx-background-color: #292B39;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 0em;
+}
+
+.button:hover{
+    -fx-background-color: #FF007F;
+}
+
+.button:pressed{
+    -fx-background-color: #FFBFDF;
+}
