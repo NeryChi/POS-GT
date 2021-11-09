@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="lienzo" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/log_in.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.LogInCont">
+   <children>
+      <Pane layoutY="443.0" prefHeight="136.0" prefWidth="504.0" styleClass="adorno_claro" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane layoutX="80.0" layoutY="376.0" prefHeight="100.0" styleClass="adorno_rosa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane fx:id="campos_anchor" layoutX="320.0" layoutY="169.0" prefHeight="322.0" prefWidth="360.0" styleClass="centrado" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="usuario" layoutY="27.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <PasswordField fx:id="password" layoutY="141.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Usuario" />
+            <Label fx:id="prueba_texto" layoutY="112.0" styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Contraseña" />
+            <Button fx:id="aceptar" layoutX="282.0" layoutY="273.0" mnemonicParsing="false" onAction="#acceder" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <FlowPane prefHeight="106.0" prefWidth="1000.0" styleClass="centrado" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="40.0" prefWidth="138.0">
+               <children>
+                  <Pane prefHeight="50.0" prefWidth="100.0" rotate="180.0" styleClass="p_clara" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="-33.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="-15.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis></Pane>
+                  <Pane prefHeight="185.0" prefWidth="40.0" rotate="180.0" styleClass="p_oscura" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="33.0" layoutY="12.0" prefHeight="46.0" prefWidth="50.0" rotate="180.0" styleClass="os" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="10.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="85.0" layoutY="14.0" prefHeight="183.0" prefWidth="32.0" rotate="180.0" styleClass="g" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="-12.0" AnchorPane.topAnchor="12.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+                  <Pane layoutX="113.0" prefHeight="136.0" prefWidth="33.0" rotate="180.0" styleClass="t" stylesheets="@../../../css/log_in.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <rotationAxis>
+                        <Point3D x="50.0" z="1.0" />
+                     </rotationAxis>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>
