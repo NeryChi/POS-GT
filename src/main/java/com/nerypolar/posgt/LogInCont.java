@@ -5,12 +5,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LogInCont implements Initializable {
@@ -21,6 +23,11 @@ public class LogInCont implements Initializable {
     @FXML
     private AnchorPane campos_anchor;
 
+    @FXML
+    private TextField usuario;
+
+    @FXML
+    private PasswordField password;
 
     @FXML
     private Label prueba_texto;
@@ -63,6 +70,42 @@ public class LogInCont implements Initializable {
                 campos_anchor.setTranslateY(alto-alto*50/100-(campos_anchor.getPrefHeight()*50/100));
             }
         });
+
+
+    }
+
+    public void acceder(){
+
+        boolean valido = false;
+
+        try{
+
+            Conexion cc = new Conexion();
+            String usuario = this.usuario.getText();
+            String password = this.password.getText();
+
+            String sql = "select * from usuario where nombreUsuario='"+usuario+"' and password='"+password+"'";
+
+            Statement st = cc.conexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            if (rs.next()){
+
+                valido = true;
+
+                if (valido == true){
+                    System.out.println("Acceso concedido");
+                } else{
+                    System.out.println("Acceso denegado");
+                }
+
+            } else {
+                System.out.println("Acceso denegado");
+            }
+
+        } catch (Exception e){
+            System.out.println("Error en la consulta o validacion del usuario" + e.getMessage());
+        }
 
 
     }

@@ -10,11 +10,11 @@
       <Pane layoutX="80.0" layoutY="376.0" prefHeight="100.0" styleClass="adorno_rosa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <AnchorPane fx:id="campos_anchor" layoutX="320.0" layoutY="169.0" prefHeight="322.0" prefWidth="360.0" styleClass="centrado" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField layoutY="27.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <PasswordField layoutY="141.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <TextField fx:id="usuario" layoutY="27.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <PasswordField fx:id="password" layoutY="141.0" prefHeight="35.0" prefWidth="344.0" styleClass="brd_redondo" stylesheets="@../../../css/log_in.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Label styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Usuario" />
             <Label fx:id="prueba_texto" layoutY="112.0" styleClass="letra_log" stylesheets="@../../../css/log_in.css" text="Contraseña" />
-            <Button layoutX="282.0" layoutY="273.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button fx:id="aceptar" layoutX="282.0" layoutY="273.0" mnemonicParsing="false" onAction="#acceder" prefHeight="35.0" prefWidth="138.0" styleClass="btn_aceptar" stylesheets="@../../../css/log_in.css" text="Aceptar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
       <FlowPane prefHeight="106.0" prefWidth="1000.0" styleClass="centrado" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
