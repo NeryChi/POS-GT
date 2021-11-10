@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="75.0" styleClass="VBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" styleClass="borde_sub2">
+            <Button fx:id="btn_usr" mnemonicParsing="false" onAction="#irUsuarios" prefHeight="75.0" prefWidth="75.0" styleClass="borde_sub2">
                <graphic>
                   <Label prefHeight="55.0" prefWidth="55.0" styleClass="user" />
                </graphic>
@@ -56,9 +46,9 @@
             <URL value="@../../../css/iconos.css" />
          </stylesheets>
       </VBox>
-      <TabPane layoutX="163.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../css/iconos.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="35.0">
+      <TabPane fx:id="madre" layoutX="163.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../css/iconos.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="35.0">
         <tabs>
-            <Tab fx:id="tab12" text="usuario1">
+            <Tab fx:id="usuarios" text="usuario1">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -68,7 +58,7 @@
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
                            </graphic>
                         </Button>
-                        <Button fx:id="jbt_nuevo22" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_agreg_usr" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggUsuario" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Editar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
                         <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Eliminar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
                         <TableView prefHeight="360.0" prefWidth="895.0" styleClass="texto_simple" stylesheets="@../../../css/tablas.css" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
@@ -88,7 +78,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab1111111" text="usuario2">
+            <Tab fx:id="agregar_usuario" text="usuario2">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -98,8 +88,8 @@
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
                            </graphic>
                         </Button>
-                        <Button fx:id="jbt_nuevo2111111" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Aceptar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
+                        <Button fx:id="btn_acept_usr" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#aggUsuario" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Aceptar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_cancel_usr" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#irUsuarios" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
                         <Label layoutX="73.0" layoutY="98.0" styleClass="texto" text="Nombre: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="90.0" />
                         <Label layoutX="87.0" layoutY="184.0" styleClass="texto" text="Nombre de usuario:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="155.0" />
                         <Label layoutX="73.0" layoutY="238.0" styleClass="texto" text="Contraseña:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="220.0" />
@@ -111,7 +101,7 @@
                               <String fx:value="borde_sub" />
                               <String fx:value="texto_simple" />
                            </styleClass></TextField>
-                        <TextField layoutX="69.0" layoutY="105.0" prefHeight="32.0" prefWidth="560.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="85.0">
+                        <TextField fx:id="txf_nombre_usr" layoutX="69.0" layoutY="105.0" prefHeight="32.0" prefWidth="560.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="85.0">
                            <styleClass>
                               <String fx:value="borde_sub" />
                               <String fx:value="texto_simple" />
@@ -146,7 +136,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab fx:id="tab1" text="nuevo1">
+          <Tab fx:id="nueva_venta" text="nuevo1">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -175,7 +165,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tab2" text="nuevo2">
+          <Tab fx:id="registro_venta" text="nuevo2">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="principal">
                      <children>
@@ -208,7 +198,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tab13" text="reportes">
+            <Tab fx:id="historial" text="reportes">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -236,7 +226,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab11" text="inventario1">
+            <Tab fx:id="inventario" text="inventario1">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -265,7 +255,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab111" text="inventario2">
+            <Tab fx:id="registrar_producto" text="inventario2">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -313,7 +303,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab112" text="proveedor1">
+            <Tab fx:id="proveedores" text="proveedor1">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
@@ -342,7 +332,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab1111" text="proveedor2">
+            <Tab fx:id="registrar_proveedor" text="proveedor2">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
