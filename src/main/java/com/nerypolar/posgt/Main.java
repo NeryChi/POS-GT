@@ -14,7 +14,7 @@ public class Main extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Punto de Ventas - POS GT");
+        stage.setTitle("");
         Image icon = new Image(getClass().getResourceAsStream("/img/p.png"));
         stage.getIcons().add(icon);
         stage.setScene(scene);
