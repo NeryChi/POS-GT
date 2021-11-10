@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 public class HomeCont implements Initializable {
@@ -31,6 +32,9 @@ public class HomeCont implements Initializable {
 
     @FXML
     private Button btn_provee;
+
+
+
 
     //Panel de usuarios -----------------------------------------------------------------------------------------------
 
@@ -74,6 +78,9 @@ public class HomeCont implements Initializable {
 
     //--------------------------------------------FIN de usuario--------------------------------------------------------
 
+
+
+
     //Panel de venta ---------------------------------------------------------------------------------------------------
 
     @FXML
@@ -98,6 +105,9 @@ public class HomeCont implements Initializable {
 
     //--------------------------------------------Fin venta-------------------------------------------------------------
 
+
+
+
     //Panel de historial -----------------------------------------------------------------------------------------------
 
     @FXML
@@ -111,7 +121,10 @@ public class HomeCont implements Initializable {
 
     //--------------------------------------------Fin historial---------------------------------------------------------
 
-    //Panel de inventario ---------------------------------------------------------------------------------------------------
+
+
+
+    //Panel de inventario ----------------------------------------------------------------------------------------------
 
     @FXML
     private Tab inventario;
@@ -133,9 +146,12 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_invet;
 
-    //--------------------------------------------Fin inventario-------------------------------------------------------------
+    //--------------------------------------------Fin inventario--------------------------------------------------------
 
-    //Panel de proveedores ---------------------------------------------------------------------------------------------------
+
+
+
+    //Panel de proveedores ---------------------------------------------------------------------------------------------
 
     @FXML
     private Tab proveedores;
@@ -157,7 +173,11 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_provee;
 
-    //--------------------------------------------Fin proveedores-------------------------------------------------------------
+    //--------------------------------------------Fin proveedores-------------------------------------------------------
+
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -165,6 +185,10 @@ public class HomeCont implements Initializable {
 
 
     }
+
+
+
+
 
     //Metodos usuario--------------------------------------------------------------------------------------------------
 
@@ -174,7 +198,115 @@ public class HomeCont implements Initializable {
 
     public void aggUsuario(){
 
+        boolean registrar = true;
+        String id = txf_cod_usr.getText();
+        String usuario = txf_nameusr_usr.getText();
+        String password = txf_pass_usr.getText();
+        String nombre = txf_nombre_usr.getText();
+        String correo = txf_correo_usr.getText();
+        String rol = txf_rol_usr.getText();
+        String telefono = txf_tel_usr.getText();
+
+        int rol_num = 0;
+
+        if (id.equals("")){
+
+            System.out.println("Por favor llene el campo ID");
+            registrar = false;
+            //Notificar al usuario
+
+        } if (usuario.equals("")){
+
+            System.out.println("Por favor llene el campo USUARIO");
+            registrar = false;
+            //Notificar al usuario
+
+        } if (password.equals("")){
+
+            System.out.println("Por favor llene el campo PASSWORD");
+            registrar = false;
+            //Notificar al usuario
+
+        } if (nombre.equals("")){
+
+            System.out.println("Por favor llene el campo NOMBRE");
+            registrar = false;
+            //Notificar al usuario
+
+        } if (correo.equals("")){
+
+            System.out.println("Por favor llene el campo CORREO");
+            registrar = false;
+            //Notificar al usuario
+
+        } if (rol.equals("...")){
+
+            System.out.println("Por favor elija un ROL para el usuario");
+            registrar = false;
+            //Notificar al usuario
+
+        } else{
+
+            switch (rol){
+
+                case "Administrador": rol_num = 1;
+                    break;
+
+                case "Vendedor": rol_num = 2;
+                    break;
+
+                default: System.out.println("Por favor elija un ROL para el usuario");
+                            registrar = false;
+                    break;
+
+            }
+
+        } if (telefono.equals("")){
+
+            System.out.println("Por favor llene el campo TELEFONO");
+            registrar =false;
+            //Notificar al usuario
+
+        }
+
+        if (registrar == true){
+
+            try{
+
+                Conexion cn = new Conexion();
+                cn.conexion();
+                String sql = "insert into usuarios(id, nombreUsuario, password, nombre, correo, rol, telefono) values(?,?,?,?,?,?,?)";
+                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                ps.setString(1, id);
+                ps.setString(2, usuario);
+                ps.setString(3, password);
+                ps.setString(4, nombre);
+                ps.setString(5, correo);
+                ps.setInt(6, rol_num);
+                ps.setString(7, telefono);
+                ps.executeUpdate();
+
+                System.out.println("Datos Agregados correctamente");
+
+            } catch (Exception e){
+                System.out.println("Error al registrer el usuraio en la base de datos" + e.getMessage());
+            }
+
+            txf_cod_usr.setText("");
+            txf_nameusr_usr.setText("");
+            txf_pass_usr.setText("");
+            txf_nombre_usr.setText("");
+            txf_correo_usr.setText("");
+            txf_rol_usr.setText("");
+            txf_tel_usr.setText("");
+            madre.getSelectionModel().select(usuarios);
+
+        } else {
+            System.out.println("Error USUARIO no registrado por flata de datos.");
+        }
     }
+
 
     public void irUsuario(){
         txf_nombre_usr.setText("");

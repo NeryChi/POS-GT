@@ -94,7 +94,7 @@ public class LogInCont implements Initializable {
             String usuario = this.usuario.getText();
             String password = this.password.getText();
 
-            String sql = "select * from usuario where nombreUsuario='"+usuario+"' and password='"+password+"'";
+            String sql = "select * from usuarios where nombreUsuario='"+usuario+"' and password='"+password+"'";
 
             Statement st = cc.conexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
