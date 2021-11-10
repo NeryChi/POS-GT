@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="75.0" styleClass="VBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -88,50 +99,60 @@
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
                            </graphic>
                         </Button>
-                        <Button fx:id="btn_acept_usr" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#aggUsuario" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Aceptar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_acept_usr" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#aggUsuario" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_cancel_usr" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#irUsuario" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Label layoutX="73.0" layoutY="98.0" styleClass="texto" text="Nombre: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="90.0" />
-                        <Label layoutX="87.0" layoutY="184.0" styleClass="texto" text="Nombre de usuario:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="155.0" />
-                        <Label layoutX="73.0" layoutY="238.0" styleClass="texto" text="Contraseña:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="220.0" />
-                        <Label layoutX="73.0" layoutY="306.0" styleClass="texto" text="Rol:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="285.0" />
-                        <Label layoutX="73.0" layoutY="368.0" styleClass="texto" text="Telefono:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="415.0" />
-                        <Label layoutX="672.0" layoutY="134.0" styleClass="texto" text="Código:" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0" />
-                        <TextField fx:id="txf_cod_usr" layoutX="705.0" layoutY="105.0" prefHeight="25.0" prefWidth="140.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField fx:id="txf_nombre_usr" layoutX="69.0" layoutY="105.0" prefHeight="32.0" prefWidth="560.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="85.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField fx:id="txf_nameusr_usr" layoutX="148.0" layoutY="174.0" prefHeight="32.0" prefWidth="697.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField fx:id="txf_pass_usr" layoutX="90.0" layoutY="191.0" prefHeight="32.0" prefWidth="755.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="215.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField fx:id="txf_rol_usr" layoutX="35.0" layoutY="285.0" prefHeight="32.0" prefWidth="810.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField fx:id="txf_correo_usr" layoutX="58.0" layoutY="322.0" prefHeight="32.0" prefWidth="787.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="345.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <Label layoutX="50.0" layoutY="380.0" styleClass="texto" text="Correo:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="350.0" />
-                        <TextField fx:id="txf_tel_usr" layoutX="68.0" layoutY="384.0" prefHeight="32.0" prefWidth="777.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="405.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
+                        <GridPane prefHeight="265.0" prefWidth="666.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane GridPane.columnIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.columnIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label styleClass="texto" text="Código:" />
+                                          <TextField fx:id="txf_id_usr" styleClass="borde_sub" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <TextField fx:id="txf_name_usr" styleClass="borde_sub" />
+                                 </children>
+                              </GridPane>
+                              <Label styleClass="texto" text="Nombre:" />
+                              <Label styleClass="texto" text="Usuario:" GridPane.rowIndex="1" />
+                              <Label styleClass="texto" text="Contraseña:" GridPane.rowIndex="2" />
+                              <Label styleClass="texto" text="Acción:" GridPane.rowIndex="3" />
+                              <Label styleClass="texto" text="Correo:" GridPane.rowIndex="4" />
+                              <TextField fx:id="txf_nameusr_usr" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txf_pass_usr" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="txf_rol_usr" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="txf_email_usr" layoutX="110.0" layoutY="249.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label layoutX="10.0" layoutY="269.0" styleClass="texto" text="Telefono:" GridPane.rowIndex="5" />
+                              <TextField fx:id="txf_tel_usr" layoutX="110.0" layoutY="267.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
                </content>
@@ -158,7 +179,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="btn_acept_venta" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggVenta" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Aceptar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_agreg_venta" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggVenta" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_cancel_venta" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
                         <Label layoutX="29.0" layoutY="455.0" styleClass="texto" text="Total a pagar: " AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" />
                      </children>
@@ -169,32 +190,92 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="principal">
                      <children>
-                        <Button fx:id="btn_regist_venta" layoutX="803.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btn_antes_venta" layoutX="616.0" layoutY="446.0" mnemonicParsing="false" onAction="#irVenta" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Anterior" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Label layoutX="36.0" layoutY="42.0" styleClass="texto_simple" text="Nombre del cliente: " AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="65.0" />
-                        <TextField layoutX="178.0" layoutY="56.0" prefHeight="25.0" prefWidth="700.0" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <Label layoutX="36.0" layoutY="106.0" styleClass="texto_simple" text="Dirección del cliente (opcional):" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="130.0" />
-                        <Label layoutX="26.0" layoutY="220.0" styleClass="texto_simple" text="Nit del cliente (opcional):" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="195.0" />
-                        <Label layoutX="80.0" layoutY="320.0" styleClass="texto" text="Subtotal:" AnchorPane.bottomAnchor="214.0" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="260.0" />
-                        <Label layoutX="90.0" layoutY="330.0" styleClass="texto" text="Aplicar descuento:" AnchorPane.bottomAnchor="149.0" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="325.0" />
-                        <Label layoutX="105.0" layoutY="386.0" styleClass="texto" text="Total a pagar:" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="390.0" />
-                        <TextField layoutX="188.0" layoutY="122.0" prefHeight="26.0" prefWidth="602.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="125.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="210.0" layoutY="188.0" prefHeight="26.0" prefWidth="646.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="190.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <Label layoutX="790.0" layoutY="260.0" styleClass="texto" text="00000.00" AnchorPane.bottomAnchor="214.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="260.0" />
-                        <Label layoutX="790.0" layoutY="346.0" styleClass="texto" text="00000.00" AnchorPane.bottomAnchor="82.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="390.0" />
-                        <TextField alignment="CENTER_RIGHT" layoutX="761.0" layoutY="320.0" prefHeight="33.0" prefWidth="90.0" promptText="00000.00" styleClass="texto" text="00000.00" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="325.0" />
+                        <GridPane prefHeight="265.0" prefWidth="666.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" prefWidth="210.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextField fx:id="txf_name_venta" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" />
+                              <Label styleClass="texto_simple" text="Nombre del cliente: " />
+                              <Label styleClass="texto_simple" text="Dirección del cliente (opcional):" GridPane.rowIndex="1" />
+                              <Label styleClass="texto_simple" text="NIT del cliente (opcional):" GridPane.rowIndex="2" />
+                              <TextField fx:id="txf_dir_venta" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txf_nit_venta" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <GridPane GridPane.rowIndex="3">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="10.0" prefWidth="55.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label styleClass="texto" text="Subtotal:" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.rowIndex="4">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" prefWidth="55.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label styleClass="texto" text="Aplicar descuento:" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.rowIndex="5">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" prefWidth="110.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label styleClass="texto" text="Total a pagar:" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <TextField fx:id="txf_desc_venta" alignment="CENTER_RIGHT" promptText="00000.00" styleClass="texto_edit" text="00000.00" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="lb_subt_venta" styleClass="texto" text="00000.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="lb_total_venta" styleClass="texto" text="00000.00" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="326.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="275.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.columnIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" prefWidth="145.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" prefWidth="145.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Button fx:id="btn_regist_venta" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" GridPane.columnIndex="1" />
+                                          <Button fx:id="btn_antes_venta" mnemonicParsing="false" onAction="#irVenta" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Anterior" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -267,37 +348,55 @@
                         </Button>
                         <Button fx:id="btn_regist_invet" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_cancel_invet" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#irInvent" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Label layoutX="73.0" layoutY="98.0" styleClass="texto" text="Nombre: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="110.0" />
-                        <Label layoutX="87.0" layoutY="184.0" styleClass="texto" text="Código Proveedor:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="175.0" />
-                        <Label layoutX="73.0" layoutY="238.0" styleClass="texto" text="Precio unitario:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="240.0" />
-                        <Label layoutX="73.0" layoutY="306.0" styleClass="texto" text="Cantidad disponible:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="305.0" />
-                        <Label layoutX="73.0" layoutY="368.0" styleClass="texto" text="Descripción:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="370.0" />
-                        <Label layoutX="672.0" layoutY="134.0" styleClass="texto" text="Código:" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="110.0" />
-                        <TextField layoutX="705.0" layoutY="105.0" prefHeight="26.0" prefWidth="140.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="105.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="69.0" layoutY="105.0" prefHeight="32.0" prefWidth="560.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="105.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="112.0" layoutY="191.0" prefHeight="32.0" prefWidth="733.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="235.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="151.0" layoutY="285.0" prefHeight="32.0" prefWidth="694.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="91.0" layoutY="322.0" prefHeight="32.0" prefWidth="754.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="365.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
+                        <GridPane prefHeight="265.0" prefWidth="666.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane GridPane.columnIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.columnIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" prefWidth="75.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label styleClass="texto" text="Código:" />
+                                          <TextField fx:id="txf_id_invent" styleClass="borde_sub" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <TextField fx:id="txf_name_invent" styleClass="borde_sub" />
+                                 </children>
+                              </GridPane>
+                              <Label styleClass="texto" text="Nombre: " />
+                              <Label styleClass="texto" text="Código Proveedor:" GridPane.rowIndex="1" />
+                              <Label styleClass="texto" text="Precio unitario:" GridPane.rowIndex="2" />
+                              <Label styleClass="texto" text="Cantidad disponible:" GridPane.rowIndex="3" />
+                              <Label styleClass="texto" text="Descripción:" GridPane.rowIndex="4" />
+                              <TextField fx:id="txf_idp_invent" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txf_prec_invent" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="txf_cant_invent" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="txf_descri_invent" layoutX="110.0" layoutY="249.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
                </content>
@@ -324,7 +423,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="btn_acept_provee" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Aceptar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_agreg_provee" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_desh_provee" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Deshabilitar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
                         <Button layoutX="421.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Borrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
                      </children>
@@ -341,44 +440,57 @@
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
                            </graphic>
                         </Button>
-                        <Button fx:id="btn_regist_provee" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_regist_provee" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#aggProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_cancel_provee" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#irProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Label layoutX="73.0" layoutY="98.0" styleClass="texto" text="Nombre: " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="110.0" />
-                        <Label layoutX="87.0" layoutY="184.0" styleClass="texto" text="Producto:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="175.0" />
-                        <Label layoutX="73.0" layoutY="238.0" styleClass="texto" text="Correo:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="240.0" />
-                        <Label layoutX="73.0" layoutY="306.0" styleClass="texto" text="Teléfono:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="305.0" />
-                        <Label layoutX="73.0" layoutY="368.0" styleClass="texto" text="Dirección:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="370.0" />
-                        <Label layoutX="672.0" layoutY="134.0" styleClass="texto" text="Código:" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="110.0" />
-                        <TextField layoutX="705.0" layoutY="105.0" prefHeight="26.0" prefWidth="140.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="105.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="68.0" layoutY="105.0" prefHeight="32.0" prefWidth="561.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="105.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="73.0" layoutY="174.0" prefHeight="32.0" prefWidth="772.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="56.0" layoutY="191.0" prefHeight="32.0" prefWidth="789.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="235.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="73.0" layoutY="285.0" prefHeight="32.0" prefWidth="772.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
-                        <TextField layoutX="76.0" layoutY="322.0" prefHeight="32.0" prefWidth="769.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="365.0">
-                           <styleClass>
-                              <String fx:value="borde_sub" />
-                              <String fx:value="texto_simple" />
-                           </styleClass></TextField>
+                        <GridPane prefHeight="265.0" prefWidth="666.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" prefWidth="75.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane GridPane.columnIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.columnIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" prefWidth="75.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label styleClass="texto" text="Código:" />
+                                          <TextField fx:id="txf_id_provee" styleClass="borde_sub" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <TextField fx:id="txf_name_provee" styleClass="borde_sub" />
+                                 </children>
+                              </GridPane>
+                              <Label styleClass="texto" text="Nombre: " />
+                              <Label styleClass="texto" text="Empresa:" GridPane.rowIndex="1" />
+                              <Label styleClass="texto" text="Correo:" GridPane.rowIndex="2" />
+                              <Label styleClass="texto" text="Teléfono:" GridPane.rowIndex="3" />
+                              <Label styleClass="texto" text="Dirección:" GridPane.rowIndex="4" />
+                              <TextField fx:id="txf_empresa_provee" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txf_email_provee" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="txf_tel_provee" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="txf_dir_provee" layoutX="110.0" layoutY="249.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
                </content>

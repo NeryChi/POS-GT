@@ -37,8 +37,6 @@
     -fx-background-color: #4D4F5c;
 }
 
-
-
 .btn_cancelar{
     -fx-background-radius: 10em;
     -fx-border-radius: 10em;
@@ -54,7 +52,7 @@
     -fx-background-color: #eaf2f3;
 }
 
-.texto {
+.texto{
     -fx-text-fill: #292B39;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
@@ -62,7 +60,7 @@
     -fx-background-color: transparent;
 }
 
-.texto_simple {
+.texto_simple{
     -fx-text-fill: #292B39;
     -fx-font-size: 15px;
 }
@@ -86,7 +84,11 @@
 .borde_sub{
     -fx-background-color: transparent;
     -fx-border-width: 0px 0px 1px 0px;
+    -fx-prompt-text-fill: #df116d;
     -fx-border-color: #292B39;
+    -fx-text-fill: #292B39;
+    -fx-font-size: 15px;
+    -fx-padding: 0px;
 }
 
 .borde_sub:focused{
@@ -98,3 +100,13 @@
     -fx-border-width: 0px 0px 2px 0px;
     -fx-border-color: #ffffff;
 }
+
+.texto_edit{
+    -fx-text-fill: #292B39;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
