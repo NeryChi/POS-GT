@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="75.0" styleClass="VBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -308,7 +298,6 @@
                               <String fx:value="borde_sub" />
                               <String fx:value="texto_simple" />
                            </styleClass></TextField>
-                        <ComboBox fx:id="cmbProveedor" layoutX="140.0" layoutY="174.0" prefHeight="32.0" prefWidth="150.0" styleClass="borde_sub" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -396,7 +385,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-26.0" prefHeight="26.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-26.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-50.0">
          <children>
             <ImageView fitHeight="83.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
