@@ -21,6 +21,9 @@ public class LogInCont implements Initializable {
     private AnchorPane lienzo;
 
     @FXML
+    private AnchorPane logo_anchor;
+
+    @FXML
     private AnchorPane campos_anchor;
 
     @FXML
@@ -41,6 +44,10 @@ public class LogInCont implements Initializable {
 
 
         float ancho = (int) lienzo.getPrefWidth();
+        float alto = (int) lienzo.getPrefHeight();
+        logo_anchor.setPrefHeight(alto*5/100);
+        logo_anchor.setTranslateY(alto*5/100);
+        logo_anchor.setTranslateX(ancho-ancho*50/100-(logo_anchor.getPrefWidth()*50/100));
         campos_anchor.setPrefWidth(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
         campos_anchor.setTranslateX(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
 
@@ -53,6 +60,7 @@ public class LogInCont implements Initializable {
                 System.out.println("Ancho : " + n_ancho);
 
                 float ancho = n_ancho.floatValue();
+                logo_anchor.setTranslateX(ancho-ancho*50/100-(logo_anchor.getPrefWidth()*50/100));
                 campos_anchor.setPrefWidth(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
                 campos_anchor.setTranslateX(ancho-ancho*50/100-(campos_anchor.getPrefWidth()*50/100));
 
@@ -67,6 +75,8 @@ public class LogInCont implements Initializable {
                 System.out.println("Ancho : " + n_alto);
 
                 float alto = n_alto.floatValue();
+                logo_anchor.setPrefHeight(alto*5/100);
+                logo_anchor.setTranslateY(alto-(alto*90/100));
                 campos_anchor.setTranslateY(alto-alto*50/100-(campos_anchor.getPrefHeight()*50/100));
             }
         });
