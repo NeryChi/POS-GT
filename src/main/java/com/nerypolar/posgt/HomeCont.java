@@ -213,7 +213,7 @@ public class HomeCont implements Initializable {
 
             System.out.println("Por favor llene el campo ID");
             registrar = false;
-            //Notificar al usuario
+            //txf_cod_usr.setC
 
         } if (usuario.equals("")){
 
