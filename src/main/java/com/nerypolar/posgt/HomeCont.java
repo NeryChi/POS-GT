@@ -1,5 +1,7 @@
 package com.nerypolar.posgt;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -7,6 +9,7 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 public class HomeCont implements Initializable {
@@ -61,7 +64,7 @@ public class HomeCont implements Initializable {
             private TextField txf_pass_usr;
 
             @FXML
-            private TextField txf_rol_usr;
+            private ComboBox<String> cbx_rol_usr;
 
             @FXML
             private TextField txf_email_usr;
@@ -164,7 +167,7 @@ public class HomeCont implements Initializable {
             private TextField txf_id_invent;
 
             @FXML
-            private TextField txf_idp_invent;
+            private ComboBox<String> cbx_idp_invent;
 
             @FXML
             private TextField txf_prec_invent;
@@ -235,18 +238,44 @@ public class HomeCont implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        ObservableList<String> roles = FXCollections.observableArrayList();
+        roles.addAll("Escoja un rol para el usuario","Administrador","Vendedor");
+
+        cbx_rol_usr.getItems().addAll(roles);
+
 
 
     }
 
+    public void idProveedor() {
 
+        try {
 
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "select * from proveedor";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                String empresa = rs.getString("empresa");
+                cbx_idp_invent.getItems().addAll(empresa);
+            }
+
+        }catch (Exception e){
+
+            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
+
+        }
+
+    }
 
 
     //Metodos usuario--------------------------------------------------------------------------------------------------
 
     public void irAggUsuario(){
 
+        cbx_rol_usr.getSelectionModel().selectFirst();
         madre.getSelectionModel().select(agregar_usuario);
     }
 
@@ -258,7 +287,7 @@ public class HomeCont implements Initializable {
         String password = txf_pass_usr.getText();
         String nombre = txf_name_usr.getText();
         String correo = txf_email_usr.getText();
-        String rol = txf_rol_usr.getText();
+        String rol = cbx_rol_usr.getSelectionModel().getSelectedItem().toString();
         String telefono = txf_tel_usr.getText();
 
         int rol_num = 0;
@@ -293,9 +322,7 @@ public class HomeCont implements Initializable {
             registrar = false;
             //Notificar al usuario
 
-        } if (rol.equals("...")){
-
-            txf_rol_usr.setPromptText("Por favor elija un ROL para el usuario");
+        } if (rol.equals("Escoja un rol para el usuario")){
             registrar = false;
             //Notificar al usuario
 
@@ -309,7 +336,7 @@ public class HomeCont implements Initializable {
                 case "Vendedor": rol_num = 2;
                     break;
 
-                default: txf_rol_usr.setPromptText("Por favor elija un ROL para el usuario");
+                default: cbx_rol_usr.setPromptText("Por favor elija un ROL para el usuario");
                             registrar = false;
                     break;
 
@@ -352,7 +379,7 @@ public class HomeCont implements Initializable {
             txf_pass_usr.setText("");
             txf_name_usr.setText("");
             txf_email_usr.setText("");
-            txf_rol_usr.setText("");
+            cbx_rol_usr.getSelectionModel().selectFirst();
             txf_tel_usr.setText("");
             madre.getSelectionModel().select(usuarios);
 
@@ -369,7 +396,7 @@ public class HomeCont implements Initializable {
         txf_pass_usr.setText("");
         txf_name_usr.setText("");
         txf_email_usr.setText("");
-        txf_rol_usr.setText("");
+        cbx_rol_usr.getSelectionModel().selectFirst();
         txf_tel_usr.setText("");
 
         txf_id_usr.setPromptText("");
@@ -377,7 +404,6 @@ public class HomeCont implements Initializable {
         txf_pass_usr.setPromptText("");
         txf_name_usr.setPromptText("");
         txf_email_usr.setPromptText("");
-        txf_rol_usr.setPromptText("");
         txf_tel_usr.setPromptText("");
         madre.getSelectionModel().select(usuarios);
     }
@@ -409,6 +435,7 @@ public class HomeCont implements Initializable {
     }
 
     public void irInvent(){
+        idProveedor();
         madre.getSelectionModel().select(inventario);
     }
 

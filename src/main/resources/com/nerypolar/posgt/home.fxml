@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -147,10 +148,10 @@
                               <Label styleClass="texto" text="Correo:" GridPane.rowIndex="4" />
                               <TextField fx:id="txf_nameusr_usr" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="txf_pass_usr" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="txf_rol_usr" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <TextField fx:id="txf_email_usr" layoutX="110.0" layoutY="249.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label layoutX="10.0" layoutY="269.0" styleClass="texto" text="Telefono:" GridPane.rowIndex="5" />
                               <TextField fx:id="txf_tel_usr" layoutX="110.0" layoutY="267.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="cbx_rol_usr" prefWidth="10000.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
@@ -346,7 +347,7 @@
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
                            </graphic>
                         </Button>
-                        <Button fx:id="btn_regist_invet" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_regist_invet" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#aggProduc" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Registrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_cancel_invet" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#irInvent" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Cancelar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
                         <GridPane prefHeight="265.0" prefWidth="666.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
                            <columnConstraints>
@@ -386,15 +387,15 @@
                                     <TextField fx:id="txf_name_invent" styleClass="borde_sub" />
                                  </children>
                               </GridPane>
-                              <Label styleClass="texto" text="Nombre: " />
-                              <Label styleClass="texto" text="Código Proveedor:" GridPane.rowIndex="1" />
+                              <Label styleClass="texto" text="Nombre:" />
+                              <Label styleClass="texto" text="ID Proveedor:" GridPane.rowIndex="1" />
                               <Label styleClass="texto" text="Precio unitario:" GridPane.rowIndex="2" />
                               <Label styleClass="texto" text="Cantidad disponible:" GridPane.rowIndex="3" />
                               <Label styleClass="texto" text="Descripción:" GridPane.rowIndex="4" />
-                              <TextField fx:id="txf_idp_invent" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="txf_prec_invent" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="txf_cant_invent" layoutX="110.0" layoutY="177.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <TextField fx:id="txf_descri_invent" layoutX="110.0" layoutY="249.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="cbx_idp_invent" prefWidth="10000.0" styleClass="borde_sub" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -497,7 +498,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-26.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-50.0">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-51.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-51.0">
          <children>
             <ImageView fitHeight="83.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
