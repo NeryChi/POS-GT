@@ -95,6 +95,19 @@
     -fx-border-width: 0px 0px 2px 0px;
 }
 
+.borde_cbx{
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #292B39;
+    -fx-text-fill: #df116d;
+    -fx-font-size: 15px;
+    -fx-padding: 0px;
+}
+
+.borde_cbx:focused{
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
 .borde_sub2{
     -fx-background-color: transparent;
     -fx-border-width: 0px 0px 2px 0px;
