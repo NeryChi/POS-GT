@@ -1,10 +1,9 @@
 package com.nerypolar.posgt;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -50,10 +49,10 @@ public class HomeCont implements Initializable {
             private Tab agregar_usuario;
 
             @FXML
-            private TextField txf_nombre_usr;
+            private TextField txf_name_usr;
 
             @FXML
-            private TextField txf_cod_usr;
+            private TextField txf_id_usr;
 
             @FXML
             private TextField txf_nameusr_usr;
@@ -65,7 +64,7 @@ public class HomeCont implements Initializable {
             private TextField txf_rol_usr;
 
             @FXML
-            private TextField txf_correo_usr;
+            private TextField txf_email_usr;
 
             @FXML
             private TextField txf_tel_usr;
@@ -87,7 +86,7 @@ public class HomeCont implements Initializable {
     private Tab nueva_venta;
 
     @FXML
-    private Button btn_acept_venta;
+    private Button btn_agreg_venta;
 
     @FXML
     private Button btn_cancel_venta;
@@ -98,12 +97,30 @@ public class HomeCont implements Initializable {
             private Tab registro_venta;
 
             @FXML
+            private TextField txf_name_venta;
+
+            @FXML
+            private TextField txf_dir_venta;
+
+            @FXML
+            private TextField txf_nit_venta;
+
+            @FXML
+            private TextField txf_desc_venta;
+
+            @FXML
+            private Label lb_subt_venta;
+
+            @FXML
+            private Label lb_total_venta;
+
+            @FXML
             private Button btn_regist_venta;
 
             @FXML
             private Button btn_antes_venta;
 
-    //--------------------------------------------Fin venta-------------------------------------------------------------
+    //--------------------------------------------FIN venta-------------------------------------------------------------
 
 
 
@@ -119,7 +136,7 @@ public class HomeCont implements Initializable {
     @FXML
     private Button btn_cancel_hist;
 
-    //--------------------------------------------Fin historial---------------------------------------------------------
+    //--------------------------------------------FIN historial---------------------------------------------------------
 
 
 
@@ -135,10 +152,28 @@ public class HomeCont implements Initializable {
     @FXML
     private Button btn_desh_invent;
 
-            //Panel registrar venta-------------------------------------------------------------------------------------
+            //Panel registrar inventario-------------------------------------------------------------------------------------
 
             @FXML
             private Tab registrar_producto;
+
+            @FXML
+            private TextField txf_name_invent;
+
+            @FXML
+            private TextField txf_id_invent;
+
+            @FXML
+            private TextField txf_idp_invent;
+
+            @FXML
+            private TextField txf_prec_invent;
+
+            @FXML
+            private TextField txf_cant_invent;
+
+            @FXML
+            private TextField txf_descri_invent;
 
             @FXML
             private Button btn_regist_invet;
@@ -146,7 +181,7 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_invet;
 
-    //--------------------------------------------Fin inventario--------------------------------------------------------
+    //--------------------------------------------FIN inventario--------------------------------------------------------
 
 
 
@@ -157,12 +192,30 @@ public class HomeCont implements Initializable {
     private Tab proveedores;
 
     @FXML
+    private TextField txf_name_provee;
+
+    @FXML
+    private TextField txf_id_provee;
+
+    @FXML
+    private TextField txf_empresa_provee;
+
+    @FXML
+    private TextField txf_email_provee;
+
+    @FXML
+    private TextField txf_tel_provee;
+
+    @FXML
+    private TextField txf_dir_provee;
+
+    @FXML
     private Button btn_desh_provee;
 
     @FXML
-    private Button btn_acept_provee;
+    private Button btn_agreg_provee;
 
-            //Panel registrar venta-------------------------------------------------------------------------------------
+            //Panel registrar proveedor-------------------------------------------------------------------------------------
 
             @FXML
             private Tab registrar_proveedor;
@@ -173,7 +226,7 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_provee;
 
-    //--------------------------------------------Fin proveedores-------------------------------------------------------
+    //--------------------------------------------FIN proveedores-------------------------------------------------------
 
 
 
@@ -193,17 +246,18 @@ public class HomeCont implements Initializable {
     //Metodos usuario--------------------------------------------------------------------------------------------------
 
     public void irAggUsuario(){
+
         madre.getSelectionModel().select(agregar_usuario);
     }
 
     public void aggUsuario(){
 
         boolean registrar = true;
-        String id = txf_cod_usr.getText();
+        String id = txf_id_usr.getText();
         String usuario = txf_nameusr_usr.getText();
         String password = txf_pass_usr.getText();
-        String nombre = txf_nombre_usr.getText();
-        String correo = txf_correo_usr.getText();
+        String nombre = txf_name_usr.getText();
+        String correo = txf_email_usr.getText();
         String rol = txf_rol_usr.getText();
         String telefono = txf_tel_usr.getText();
 
@@ -211,37 +265,37 @@ public class HomeCont implements Initializable {
 
         if (id.equals("")){
 
-            System.out.println("Por favor llene el campo ID");
+            txf_id_usr.setPromptText("Llenar ID");
             registrar = false;
             //txf_cod_usr.setC
 
         } if (usuario.equals("")){
 
-            System.out.println("Por favor llene el campo USUARIO");
+            txf_nameusr_usr.setPromptText("Por favor llene el campo USUARIO");
             registrar = false;
             //Notificar al usuario
 
         } if (password.equals("")){
 
-            System.out.println("Por favor llene el campo PASSWORD");
+            txf_pass_usr.setPromptText("Por favor llene el campo CONTRASEÑA");
             registrar = false;
             //Notificar al usuario
 
         } if (nombre.equals("")){
 
-            System.out.println("Por favor llene el campo NOMBRE");
+            txf_name_usr.setPromptText("Por favor llene el campo NOMBRE");
             registrar = false;
             //Notificar al usuario
 
         } if (correo.equals("")){
 
-            System.out.println("Por favor llene el campo CORREO");
+            txf_email_usr.setPromptText("Por favor llene el campo CORREO");
             registrar = false;
             //Notificar al usuario
 
         } if (rol.equals("...")){
 
-            System.out.println("Por favor elija un ROL para el usuario");
+            txf_rol_usr.setPromptText("Por favor elija un ROL para el usuario");
             registrar = false;
             //Notificar al usuario
 
@@ -255,7 +309,7 @@ public class HomeCont implements Initializable {
                 case "Vendedor": rol_num = 2;
                     break;
 
-                default: System.out.println("Por favor elija un ROL para el usuario");
+                default: txf_rol_usr.setPromptText("Por favor elija un ROL para el usuario");
                             registrar = false;
                     break;
 
@@ -263,7 +317,7 @@ public class HomeCont implements Initializable {
 
         } if (telefono.equals("")){
 
-            System.out.println("Por favor llene el campo TELEFONO");
+            txf_tel_usr.setPromptText("Por favor llene el campo TELEFONO");
             registrar =false;
             //Notificar al usuario
 
@@ -293,24 +347,38 @@ public class HomeCont implements Initializable {
                 System.out.println("Error al registrer el usuraio en la base de datos" + e.getMessage());
             }
 
-            txf_cod_usr.setText("");
+            txf_id_usr.setText("");
             txf_nameusr_usr.setText("");
             txf_pass_usr.setText("");
-            txf_nombre_usr.setText("");
-            txf_correo_usr.setText("");
+            txf_name_usr.setText("");
+            txf_email_usr.setText("");
             txf_rol_usr.setText("");
             txf_tel_usr.setText("");
             madre.getSelectionModel().select(usuarios);
 
         } else {
-            System.out.println("Error USUARIO no registrado por flata de datos.");
+            System.out.println("Error USUARIO no registrado por falta de datos.");
         }
     }
 
 
     public void irUsuario(){
-        txf_nombre_usr.setText("");
-        txf_cod_usr.setText("");
+
+        txf_id_usr.setText("");
+        txf_nameusr_usr.setText("");
+        txf_pass_usr.setText("");
+        txf_name_usr.setText("");
+        txf_email_usr.setText("");
+        txf_rol_usr.setText("");
+        txf_tel_usr.setText("");
+
+        txf_id_usr.setPromptText("");
+        txf_nameusr_usr.setPromptText("");
+        txf_pass_usr.setPromptText("");
+        txf_name_usr.setPromptText("");
+        txf_email_usr.setPromptText("");
+        txf_rol_usr.setPromptText("");
+        txf_tel_usr.setPromptText("");
         madre.getSelectionModel().select(usuarios);
     }
 
@@ -351,9 +419,103 @@ public class HomeCont implements Initializable {
 
     public void aggProvee(){
 
+        boolean registro = true;
+        String id = txf_id_provee.getText();
+        String nombre = txf_name_provee.getText();
+        String empresa = txf_empresa_provee.getText();
+        String correo = txf_email_provee.getText();
+        String telefono = txf_tel_provee.getText();
+        String direccion = txf_dir_provee.getText();
+
+        if (id.equals("")){
+
+            txf_id_provee.setPromptText("Llenar ID");
+            registro = false;
+            //Notificar al usuario
+
+        }if (nombre.equals("")){
+
+            txf_name_provee.setPromptText("Por favor llene el campo NOMBRE");
+            registro = false;
+            //Notificar al usuario
+
+        }if (empresa.equals("")){
+
+            txf_empresa_provee.setPromptText("Por favor llene el campo EMPRESA");
+            registro = false;
+            //Notificar al usuario
+
+        }if (correo.equals("")){
+
+            txf_email_provee.setPromptText("Por favor llene el campo CORREO");
+            registro = false;
+            //Notificar al usuario
+
+        }if (telefono.equals("")){
+
+            txf_tel_provee.setPromptText("Por favor llene el campo TELEFONO");
+            registro = false;
+            //Notificar al usuario
+
+        }if (direccion.equals("")){
+            txf_dir_provee.setPromptText("Por favor llene el campo DIRECCIÓN");
+            registro = false;
+            //Notificar al usuario
+
+        }
+
+        if (registro == true){
+            System.out.println("Sipaso");
+            try {
+
+                Conexion cn = new Conexion();
+                cn.conexion();
+                String sql = "insert into proveedor(id, empresa, nombre, correo, telefono, direccion) values(?,?,?,?,?,?)";
+                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                ps.setString(1, id);
+                ps.setString(2, empresa);
+                ps.setString(3, nombre);
+                ps.setString(4, correo);
+                ps.setString(5, telefono);
+                ps.setString(6, direccion);
+                ps.executeUpdate();
+
+                System.out.println("Datos Agregados correctamente");
+
+            } catch (Exception e){
+                System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
+            }
+
+            txf_id_provee.setText("");
+            txf_name_provee.setText("");
+            txf_empresa_provee.setText("");
+            txf_email_provee.setText("");
+            txf_tel_provee.setText("");
+            txf_dir_provee.setText("");
+            madre.getSelectionModel().select(proveedores);
+
+        }else {
+            System.out.println("Error PROVEEDOR no registrado por falta de datos.");
+        }
+
     }
 
     public void irProvee(){
+
+        txf_id_provee.setText("");
+        txf_name_provee.setText("");
+        txf_empresa_provee.setText("");
+        txf_email_provee.setText("");
+        txf_tel_provee.setText("");
+        txf_dir_provee.setText("");
+
+        txf_id_provee.setPromptText("");
+        txf_name_provee.setPromptText("");
+        txf_empresa_provee.setPromptText("");
+        txf_email_provee.setPromptText("");
+        txf_tel_provee.setPromptText("");
+        txf_dir_provee.setPromptText("");
         madre.getSelectionModel().select(proveedores);
     }
 }
