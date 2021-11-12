@@ -870,6 +870,7 @@ public class HomeCont implements Initializable {
 
     }
 
+    //Pasar datos de la tabla a los campos
     public void passProvee(){
 
         String passId = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
