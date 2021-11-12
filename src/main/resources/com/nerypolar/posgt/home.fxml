@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="1000.0" styleClass="principal" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nerypolar.posgt.HomeCont">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="75.0" styleClass="VBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -64,7 +51,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
-                        <TextField layoutX="58.0" layoutY="18.0" prefHeight="30.0" styleClass="brd_redondo_left" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="filtro_out_usr" editable="false" styleClass="filtro_out" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="filtro_in_usr" onAction="#accionFiltrodUsr" onKeyTyped="#inputFiltroUsr" styleClass="filtro_in" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
                         <Button layoutX="801.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="brd_redondo_rigth" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
                            <graphic>
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
