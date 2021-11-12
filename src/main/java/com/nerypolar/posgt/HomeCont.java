@@ -302,7 +302,7 @@ public class HomeCont implements Initializable {
 
             txf_id_usr.setPromptText("Llenar ID");
             registrar = false;
-            //Notificar al usuario
+            //txf_cod_usr.setC
 
         } if (usuario.equals("")){
 
