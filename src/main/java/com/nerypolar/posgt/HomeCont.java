@@ -5,13 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class HomeCont implements Initializable {
@@ -47,6 +52,9 @@ public class HomeCont implements Initializable {
 
    @FXML
     private Button btn_agreg_usr;
+
+   @FXML
+   private TextField filtro_in_usr, filtro_out_usr;
 
             //Panel agregar usuario-------------------------------------------------------------------------------------
 
@@ -287,7 +295,7 @@ public class HomeCont implements Initializable {
         roles.addAll("Administrador","Vendedor");
         cbx_rol_usr.getItems().addAll(roles);
 
-
+        filtro_in_usr.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         loadTableProduc();
         loadTableProvee();
     }
@@ -785,17 +793,42 @@ public class HomeCont implements Initializable {
         tbl_proveedores.setItems(proveeList);
 
     }
+
+
+    public void inputFiltroUsr(){
+
+        try {
+
+            String texto = filtro_in_usr.getText();
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "SELECT * FROM usuarios WHERE nombre LIKE '%" +texto+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()){
+                filtro_out_usr.setText(rs.getString("nombre"));
+            } else {
+                filtro_out_usr.setText("");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al filtrar la busqueda" + e.getMessage());
+        }
+
+        filtro_out_usr.setStyle("-fx-text-fill: Gray");
+        System.out.println("Teclazo");
+
+    }
+
+    public void accionFiltrodUsr(){
+
+        filtro_in_usr.setText(filtro_out_usr.getText());
+
+    }
+
+
 }
-
-
-
-
-
-
-//COMENTARIO DE MARIO OTRA VEZ
-
-
-//Nery comentarios rer
 
 
 
