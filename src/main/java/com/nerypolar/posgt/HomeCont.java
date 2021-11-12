@@ -435,6 +435,7 @@ public class HomeCont implements Initializable {
     }
 
     public void irInvent(){
+        cbx_idp_invent.getItems().removeAll();
         idProveedor();
         madre.getSelectionModel().select(inventario);
     }
