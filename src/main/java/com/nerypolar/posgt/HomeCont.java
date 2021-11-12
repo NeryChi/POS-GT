@@ -1,10 +1,12 @@
 package com.nerypolar.posgt;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
@@ -150,10 +152,32 @@ public class HomeCont implements Initializable {
     private Tab inventario;
 
     @FXML
-    private Button btn_acept_invent;
+    private Button btn_acept_invent, btn_desh_invent;
 
     @FXML
-    private Button btn_desh_invent;
+    private TableView<ClsProductos> tbl_inventario;
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_id_invent;
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_name_invent;
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_pro_invent;
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_descri_invent;
+
+    @FXML
+    private TableColumn<ClsProductos, Integer> col_cant_invent;
+
+    @FXML
+    private TableColumn<ClsProductos, Double> col_precio_invent;
+
+    ObservableList<ClsProductos> producList = FXCollections.observableArrayList();
+
+
 
             //Panel registrar inventario-------------------------------------------------------------------------------------
 
@@ -213,10 +237,31 @@ public class HomeCont implements Initializable {
     private TextField txf_dir_provee;
 
     @FXML
-    private Button btn_desh_provee;
+    private Button btn_desh_provee, btn_agreg_provee;
 
     @FXML
-    private Button btn_agreg_provee;
+    private TableView<ClsProveedores> tbl_proveedores;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_id_provee;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_empresa_provee;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_encargado_provee;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_dir_provee;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_correo_provee;
+
+    @FXML
+    private TableColumn<ClsProveedores, String> col_tel_proveedor;
+
+    ObservableList<ClsProveedores> proveeList = FXCollections.observableArrayList();
+
 
             //Panel registrar proveedor-------------------------------------------------------------------------------------
 
@@ -239,35 +284,12 @@ public class HomeCont implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ObservableList<String> roles = FXCollections.observableArrayList();
-        roles.addAll("Escoja un rol para el usuario","Administrador","Vendedor");
-
+        roles.addAll("Administrador","Vendedor");
         cbx_rol_usr.getItems().addAll(roles);
 
 
-
-    }
-
-    public void idProveedor() {
-
-        try {
-
-            Conexion cn = new Conexion();
-            cn.conexion();
-            String sql = "select * from proveedor";
-            PreparedStatement ps = cn.conexion().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()){
-                String empresa = rs.getString("empresa");
-                cbx_idp_invent.getItems().addAll(empresa);
-            }
-
-        }catch (Exception e){
-
-            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
-
-        }
-
+        loadTableProduc();
+        loadTableProvee();
     }
 
 
@@ -275,7 +297,7 @@ public class HomeCont implements Initializable {
 
     public void irAggUsuario(){
 
-        cbx_rol_usr.getSelectionModel().selectFirst();
+        cbx_rol_usr.setPromptText("");
         madre.getSelectionModel().select(agregar_usuario);
     }
 
@@ -287,7 +309,7 @@ public class HomeCont implements Initializable {
         String password = txf_pass_usr.getText();
         String nombre = txf_name_usr.getText();
         String correo = txf_email_usr.getText();
-        String rol = cbx_rol_usr.getSelectionModel().getSelectedItem().toString();
+        String rol = cbx_rol_usr.getSelectionModel().getSelectedItem();
         String telefono = txf_tel_usr.getText();
 
         int rol_num = 0;
@@ -322,7 +344,8 @@ public class HomeCont implements Initializable {
             registrar = false;
             //Notificar al usuario
 
-        } if (rol.equals("Escoja un rol para el usuario")){
+        } if (rol == null){
+            cbx_rol_usr.setPromptText("Por favor seleccione un ROL");
             registrar = false;
             //Notificar al usuario
 
@@ -343,7 +366,6 @@ public class HomeCont implements Initializable {
             }
 
         } if (telefono.equals("")){
-
             txf_tel_usr.setPromptText("Por favor llene el campo TELEFONO");
             registrar =false;
             //Notificar al usuario
@@ -379,7 +401,7 @@ public class HomeCont implements Initializable {
             txf_pass_usr.setText("");
             txf_name_usr.setText("");
             txf_email_usr.setText("");
-            cbx_rol_usr.getSelectionModel().selectFirst();
+            cbx_rol_usr.getSelectionModel().clearSelection();
             txf_tel_usr.setText("");
             madre.getSelectionModel().select(usuarios);
 
@@ -396,7 +418,7 @@ public class HomeCont implements Initializable {
         txf_pass_usr.setText("");
         txf_name_usr.setText("");
         txf_email_usr.setText("");
-        cbx_rol_usr.getSelectionModel().selectFirst();
+        cbx_rol_usr.getSelectionModel().clearSelection();
         txf_tel_usr.setText("");
 
         txf_id_usr.setPromptText("");
@@ -427,23 +449,189 @@ public class HomeCont implements Initializable {
     }
 
     //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
 
-    public void irAggProduc(){ madre.getSelectionModel().select(registrar_producto);}
+
+    //TRAE EL ID DEL PROVEEDOR Y TAMBIEN NOMBRE DE LA EMPRESA
+    public void idProveedor() {
+
+        try {
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "SELECT A.codigo, A.empresa FROM proveedor A";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                String id = rs.getString("codigo");
+                String empresa = rs.getString("empresa");
+                cbx_idp_invent.getItems().addAll(id + " | " +empresa);
+            }
+
+        }catch (Exception e){
+
+            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
+
+        }
+
+    }
+
+    public void irAggProduc(){
+        idProveedor();
+        madre.getSelectionModel().select(registrar_producto);
+    }
 
     public void aggProduc(){
+        boolean registroPro = true;
+        String id = txf_id_invent.getText();
+        String nombre = txf_name_invent.getText();
+        String idp = cbx_idp_invent.getSelectionModel().getSelectedItem();
+        String prec = txf_prec_invent.getText();
+        String cant = txf_cant_invent.getText();
+        String descri = txf_descri_invent.getText();
 
+        if (id.equals("")) {
+            txf_id_invent.setPromptText("Por favor llene el campo CÓDIGO");
+            registroPro = false;
+
+        }
+        if (nombre.equals("")) {
+            txf_name_invent.setPromptText("Por favor llene el campo NOMBRE");
+            registroPro = false;
+
+        } if (idp == null){
+            cbx_idp_invent.setPromptText("Por favor llene elija un proveedor");
+            registroPro = false;
+        }else {
+            registroPro = true;
+        }
+
+        if (prec.equals("")) {
+            txf_prec_invent.setPromptText("Por favor llene el campo PRECIO");
+            registroPro = false;
+
+        }
+        if (cant.equals("")) {
+            txf_cant_invent.setPromptText("Por favor llene el campo CANTIDAD");
+            registroPro = false;
+
+        }
+        if (descri.equals("")) {
+            txf_descri_invent.setPromptText("Por favor llene el campo DESCRIPCION");
+            registroPro = false;
+        }
+
+        if (registroPro == true){
+
+            try {
+                Conexion cn = new Conexion();
+                cn.conexion();
+                String sql = "insert into productos(id, nombre, empresaProveedor, precio_unitario, cantidad, descripcion) values(?,?,?,?,?,?)";
+                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                ps.setString(1, id);
+                ps.setString(2, nombre);
+                ps.setString(3, idp);
+                ps.setString(4, prec);
+                ps.setString(5, cant);
+                ps.setString(6, descri);
+                ps.executeUpdate();
+                System.out.println("Datos Agregados correctamente");
+
+                refreshTable();//RECARGA LA TABLA INVENTARIO
+
+            }catch (Exception e){
+
+                System.out.println("Error al registrar el producto en la base de datos" + e.getMessage());
+
+            }
+
+            txf_id_invent.setText("");
+            txf_name_invent.setText("");
+            cbx_idp_invent.setPromptText("");
+            txf_prec_invent.setText("");
+            txf_cant_invent.setText("");
+            txf_descri_invent.setText("");
+            madre.getSelectionModel().select(inventario);
+
+        }else {
+            System.out.println("Error PRODUCTO no registrado por falta de datos.");
+        }
     }
 
     public void irInvent(){
-        idProveedor();
         madre.getSelectionModel().select(inventario);
     }
+
+    //RECARGA LA TABLA INVENTARIO
+    public void refreshTable(){
+
+        try {
+
+            producList.clear();
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "SELECT * FROM productos";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                producList.addAll(new ClsProductos(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("empresaProveedor"),
+                        rs.getDouble("precio_unitario"),
+                        rs.getInt("cantidad"),
+                        rs.getString("descripcion")
+                ));
+
+            }
+
+
+        }catch (Exception e){
+
+            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
+
+        }
+    }
+
+    //Llena los tabla productos al inicio
+
+    private void loadTableProduc() {
+
+        refreshTable();
+
+        col_id_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("id"));
+        col_name_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("nombre"));
+        col_pro_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("empresaProveedor"));
+        col_descri_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("descripcion"));
+        col_cant_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, Integer>("cantidad"));
+        col_precio_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, Double>("precio_unitario"));
+
+        tbl_inventario.setItems(producList);
+
+    }
+
+
+    //--------------------------------------------FIN de usuario--------------------------------------------------------
+    //--------------------------------------------FIN de usuario--------------------------------------------------------
+    //--------------------------------------------FIN de usuario--------------------------------------------------------
+    //--------------------------------------------FIN de usuario--------------------------------------------------------
+    //--------------------------------------------FIN de usuario--------------------------------------------------------
 
 
     //Metodos proveedor------------------------------------------------------------------------------------------------
 
+
+    //Lleva a la agregar un nuevo proveedor
     public void irAggProvee(){ madre.getSelectionModel().select(registrar_proveedor);}
 
+
+    //Registra un nuevo proveedor
     public void aggProvee(){
 
         boolean registro = true;
@@ -492,21 +680,23 @@ public class HomeCont implements Initializable {
         }
 
         if (registro == true){
-            System.out.println("Sipaso");
+
             try {
 
                 Conexion cn = new Conexion();
                 cn.conexion();
-                String sql = "insert into proveedor(id, empresa, nombre, correo, telefono, direccion) values(?,?,?,?,?,?)";
+                String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
                 PreparedStatement ps = cn.conexion().prepareStatement(sql);
 
-                ps.setString(1, id);
-                ps.setString(2, empresa);
+                ps.setString(1, empresa);
+                ps.setString(2, id);
                 ps.setString(3, nombre);
                 ps.setString(4, correo);
                 ps.setString(5, telefono);
                 ps.setString(6, direccion);
                 ps.executeUpdate();
+
+                refreshTableProvee();
 
                 System.out.println("Datos Agregados correctamente");
 
@@ -545,4 +735,60 @@ public class HomeCont implements Initializable {
         txf_dir_provee.setPromptText("");
         madre.getSelectionModel().select(proveedores);
     }
+
+    //REFRESCAR TABLA PROVEEDORES
+    public void refreshTableProvee(){
+
+        try {
+
+            proveeList.clear();
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "SELECT * FROM proveedor";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+
+                proveeList.addAll(new ClsProveedores(
+                        rs.getString("empresa"),
+                        rs.getString("codigo"),
+                        rs.getString("encargado"),
+                        rs.getString("correo"),
+                        rs.getString("telefono"),
+                        rs.getString("direccion")
+                ));
+
+            }
+
+
+        }catch (Exception e){
+
+            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
+
+        }
+    }
+
+    //LLENA LA TABLA PROVEEDORES AL INICIO
+    private void loadTableProvee() {
+
+        refreshTableProvee();
+
+        col_id_provee.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("codigo"));
+        col_empresa_provee.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("empresa"));
+        col_encargado_provee.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("encargado"));
+        col_dir_provee.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("direccion"));
+        col_correo_provee.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("correo"));
+        col_tel_proveedor.setCellValueFactory(new PropertyValueFactory<ClsProveedores, String>("telefono"));
+
+        tbl_proveedores.setItems(proveeList);
+
+    }
 }
+
+
+
+
+
+
