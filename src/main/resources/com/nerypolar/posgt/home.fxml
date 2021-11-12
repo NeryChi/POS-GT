@@ -485,7 +485,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-51.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-51.0">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-51.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="83.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
