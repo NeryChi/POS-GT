@@ -331,9 +331,9 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="btn_agg_invent" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggProduc" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agreagar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btn_agg_invent" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggProduc" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
                         <Button fx:id="btn_edit_invent" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Editar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Button fx:id="btn_borra_invent" layoutX="421.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Borrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
+                        <Button fx:id="btn_delete_invent" layoutX="421.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Eliminar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -427,8 +427,8 @@
                            </columnResizePolicy>
                         </TableView>
                         <Button fx:id="btn_agreg_provee" layoutX="803.0" layoutY="452.0" mnemonicParsing="false" onAction="#irAggProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_aceptar" text="Agregar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btn_desh_provee" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Deshabilitar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
-                        <Button layoutX="421.0" layoutY="452.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Borrar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
+                        <Button fx:id="btn_edit_provee" layoutX="606.0" layoutY="446.0" mnemonicParsing="false" onAction="#passProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_cancelar" text="Editar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="145.0" />
+                        <Button fx:id="btn_delete_provee" layoutX="421.0" layoutY="452.0" mnemonicParsing="false" onAction="#deleteProvee" prefHeight="30.0" prefWidth="130.0" styleClass="btn_borrar" text="Eliminar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="290.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -500,7 +500,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-51.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-51.0">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="76.0" layoutY="-51.0" prefHeight="59.0" prefWidth="924.0" styleClass="principal" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-50.0">
          <children>
             <ImageView fitHeight="83.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -23,20 +23,7 @@ public class HomeCont implements Initializable {
     private TabPane madre;
 
     @FXML
-    private Button btn_usr;
-
-    @FXML
-    private Button btn_venta;
-
-    @FXML
-    private Button btn_hist;
-
-    @FXML
-    private Button btn_invent;
-
-    @FXML
-    private Button btn_provee;
-
+    private Button btn_usr, btn_venta, btn_hist, btn_invent, btn_provee;
 
 
 
@@ -152,7 +139,7 @@ public class HomeCont implements Initializable {
     private Tab inventario;
 
     @FXML
-    private Button btn_acept_invent, btn_desh_invent;
+    private Button btn_delete_invent, btn_edit_invent, btn_agg_invent;
 
     @FXML
     private TableView<ClsProductos> tbl_inventario;
@@ -176,6 +163,7 @@ public class HomeCont implements Initializable {
     private TableColumn<ClsProductos, Double> col_precio_invent;
 
     ObservableList<ClsProductos> producList = FXCollections.observableArrayList();
+    ObservableList<ClsEmpresas> idProList = FXCollections.observableArrayList();
 
 
 
@@ -203,10 +191,7 @@ public class HomeCont implements Initializable {
             private TextField txf_descri_invent;
 
             @FXML
-            private Button btn_regist_invet;
-
-            @FXML
-            private Button btn_cancel_invet;
+            private Button btn_cancel_invet, btn_regist_invet;
 
     //--------------------------------------------FIN inventario--------------------------------------------------------
 
@@ -237,7 +222,7 @@ public class HomeCont implements Initializable {
     private TextField txf_dir_provee;
 
     @FXML
-    private Button btn_desh_provee, btn_agreg_provee;
+    private Button btn_delete_provee, btn_agreg_provee, btn_edit_provee;
 
     @FXML
     private TableView<ClsProveedores> tbl_proveedores;
@@ -286,7 +271,6 @@ public class HomeCont implements Initializable {
         ObservableList<String> roles = FXCollections.observableArrayList();
         roles.addAll("Administrador","Vendedor");
         cbx_rol_usr.getItems().addAll(roles);
-
 
         loadTableProduc();
         loadTableProvee();
@@ -459,16 +443,17 @@ public class HomeCont implements Initializable {
     public void idProveedor() {
 
         try {
+
+            idProList.clear();
+
             Conexion cn = new Conexion();
             cn.conexion();
-            String sql = "SELECT A.codigo, A.empresa FROM proveedor A";
+            String sql = "SELECT empresa FROM proveedor";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
-                String id = rs.getString("codigo");
-                String empresa = rs.getString("empresa");
-                cbx_idp_invent.getItems().addAll(id + " | " +empresa);
+                idProList.addAll(new ClsEmpresas(rs.getString("empresa")));
             }
 
         }catch (Exception e){
@@ -481,7 +466,13 @@ public class HomeCont implements Initializable {
 
     public void irAggProduc(){
         idProveedor();
+        cleanProduc();
         madre.getSelectionModel().select(registrar_producto);
+    }
+
+    public void cleanProduc(){
+
+
     }
 
     public void aggProduc(){
@@ -549,12 +540,7 @@ public class HomeCont implements Initializable {
 
             }
 
-            txf_id_invent.setText("");
-            txf_name_invent.setText("");
-            cbx_idp_invent.setPromptText("");
-            txf_prec_invent.setText("");
-            txf_cant_invent.setText("");
-            txf_descri_invent.setText("");
+            cleanProduc();
             madre.getSelectionModel().select(inventario);
 
         }else {
@@ -591,7 +577,6 @@ public class HomeCont implements Initializable {
 
             }
 
-
         }catch (Exception e){
 
             System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
@@ -616,19 +601,68 @@ public class HomeCont implements Initializable {
 
     }
 
+    //ELiminar un dato seleccionado
 
-    //--------------------------------------------FIN de usuario--------------------------------------------------------
-    //--------------------------------------------FIN de usuario--------------------------------------------------------
-    //--------------------------------------------FIN de usuario--------------------------------------------------------
-    //--------------------------------------------FIN de usuario--------------------------------------------------------
-    //--------------------------------------------FIN de usuario--------------------------------------------------------
+    public void deleteProduct(){
+
+        try {
+            //Llamo el item selecionado en la tabla de provedores en este caso el codigo el cual lo usare para buscarlo y eliminarlo
+
+            String deletPro = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "DELETE FROM `proveedor` WHERE codigo = " + "'" + deletPro + "'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ps.execute();
+
+            refreshTableProvee();
+
+            System.out.println("Dato eliminado exitosamente");
+
+        }catch (Exception e){
+
+            System.out.println("Error al Eliminar el dato en la base de datos" + e.getMessage());
+
+        }
+
+    }
+
+
+    //--------------------------------------------FIN de inventario--------------------------------------------------------
+    //--------------------------------------------FIN de inventario--------------------------------------------------------
+    //--------------------------------------------FIN de inventario--------------------------------------------------------
+    //--------------------------------------------FIN de inventario--------------------------------------------------------
+    //--------------------------------------------FIN de inventario--------------------------------------------------------
 
 
     //Metodos proveedor------------------------------------------------------------------------------------------------
 
 
     //Lleva a la agregar un nuevo proveedor
-    public void irAggProvee(){ madre.getSelectionModel().select(registrar_proveedor);}
+    public void irAggProvee(){
+        btn_regist_provee.setText("Registrar");
+        txf_id_provee.setEditable(true);
+        madre.getSelectionModel().select(registrar_proveedor);
+    }
+
+    public void cleanProvee(){
+
+        txf_id_provee.setText("");
+        txf_name_provee.setText("");
+        txf_empresa_provee.setText("");
+        txf_email_provee.setText("");
+        txf_tel_provee.setText("");
+        txf_dir_provee.setText("");
+
+        txf_id_provee.setPromptText("");
+        txf_name_provee.setPromptText("");
+        txf_empresa_provee.setPromptText("");
+        txf_email_provee.setPromptText("");
+        txf_tel_provee.setPromptText("");
+        txf_dir_provee.setPromptText("");
+
+    }
 
 
     //Registra un nuevo proveedor
@@ -681,35 +715,71 @@ public class HomeCont implements Initializable {
 
         if (registro == true){
 
-            try {
+            switch (btn_regist_provee.getText()){
+                case "Registrar":
+                    try {
 
-                Conexion cn = new Conexion();
-                cn.conexion();
-                String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
-                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
 
-                ps.setString(1, empresa);
-                ps.setString(2, id);
-                ps.setString(3, nombre);
-                ps.setString(4, correo);
-                ps.setString(5, telefono);
-                ps.setString(6, direccion);
-                ps.executeUpdate();
+                        ps.setString(1, empresa);
+                        ps.setString(2, id);
+                        ps.setString(3, nombre);
+                        ps.setString(4, correo);
+                        ps.setString(5, telefono);
+                        ps.setString(6, direccion);
+                        ps.executeUpdate();
 
-                refreshTableProvee();
+                        refreshTableProvee();
 
-                System.out.println("Datos Agregados correctamente");
+                        System.out.println("Datos Agregados correctamente");
 
-            } catch (Exception e){
-                System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
+                    } catch (Exception e){
+                        System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
+                    }
+
+                    break;
+
+                case "Actualizar":
+
+
+                    try {
+
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "UPDATE  proveedor SET " +
+                                "empresa = ?" +
+                                ",encargado = ?" +
+                                ",correo = ?" +
+                                ",telefono = ?" +
+                                ",direccion = ?" +
+                                "WHERE codigo=?";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                        ps.setString(1, empresa);
+                        ps.setString(2, nombre);
+                        ps.setString(3, correo);
+                        ps.setString(4, telefono);
+                        ps.setString(5, direccion);
+                        ps.setString(6, id);
+                        ps.executeUpdate();
+
+                        refreshTableProvee();
+
+                        System.out.println("Datos Actualizados correctamente");
+
+                    } catch (Exception e){
+                        System.out.println("Error al ACTUALIZAR el proveedor en la base de datos" + e.getMessage());
+                    }
+
+                    break;
+
+                default: System.out.println("No se REGISTRO ni se ACTUALIZO los datos");
+
             }
-
-            txf_id_provee.setText("");
-            txf_name_provee.setText("");
-            txf_empresa_provee.setText("");
-            txf_email_provee.setText("");
-            txf_tel_provee.setText("");
-            txf_dir_provee.setText("");
+            cleanProvee();
             madre.getSelectionModel().select(proveedores);
 
         }else {
@@ -719,21 +789,8 @@ public class HomeCont implements Initializable {
     }
 
     public void irProvee(){
-
-        txf_id_provee.setText("");
-        txf_name_provee.setText("");
-        txf_empresa_provee.setText("");
-        txf_email_provee.setText("");
-        txf_tel_provee.setText("");
-        txf_dir_provee.setText("");
-
-        txf_id_provee.setPromptText("");
-        txf_name_provee.setPromptText("");
-        txf_empresa_provee.setPromptText("");
-        txf_email_provee.setPromptText("");
-        txf_tel_provee.setPromptText("");
-        txf_dir_provee.setPromptText("");
-        madre.getSelectionModel().select(proveedores);
+        cleanProvee();
+       madre.getSelectionModel().select(proveedores);
     }
 
     //REFRESCAR TABLA PROVEEDORES
@@ -785,14 +842,62 @@ public class HomeCont implements Initializable {
         tbl_proveedores.setItems(proveeList);
 
     }
+
+    //ELiminar un dato seleccionado
+
+    public void deleteProvee(){
+
+        try {
+            //Llamo el item selecionado en la tabla de provedores en este caso el codigo el cual lo usare para buscarlo y eliminarlo
+
+            String deletPro = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "DELETE FROM `proveedor` WHERE codigo = " + "'" + deletPro + "'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ps.execute();
+
+            refreshTableProvee();
+
+            System.out.println("Dato eliminado exitosamente");
+
+        }catch (Exception e){
+
+            System.out.println("Error al Eliminar el dato en la base de datos" + e.getMessage());
+
+        }
+
+    }
+
+    public void passProvee(){
+
+        String passId = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
+        txf_id_provee.setText(passId);
+
+        String passName = tbl_proveedores.getSelectionModel().getSelectedItem().encargado;
+        txf_name_provee.setText(passName);
+
+        String passEmp = tbl_proveedores.getSelectionModel().getSelectedItem().empresa;
+        txf_empresa_provee.setText(passEmp);
+
+        String passEmail = tbl_proveedores.getSelectionModel().getSelectedItem().correo;
+        txf_email_provee.setText(passEmail);
+
+        String passTel = tbl_proveedores.getSelectionModel().getSelectedItem().telefono;
+        txf_tel_provee.setText(passTel);
+
+        String passDir = tbl_proveedores.getSelectionModel().getSelectedItem().direccion;
+        txf_dir_provee.setText(passDir);
+
+        btn_regist_provee.setText("Actualizar");
+        txf_id_provee.setEditable(false);
+
+        madre.getSelectionModel().select(registrar_proveedor);
+
+    }
 }
 
-
-
-
-
-
-//COMENTARIO DE MARIO OTRA VEZ
 
 
 
