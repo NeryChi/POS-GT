@@ -99,6 +99,8 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_usr;
 
+    ObservableList<ClsProductos> usuarioList = FXCollections.observableArrayList();
+
     //--------------------------------------------FIN de usuario--------------------------------------------------------
 
 
@@ -213,6 +215,7 @@ public class HomeCont implements Initializable {
     private TableColumn<ClsProductos, String> col_precio_invent;
 
     ObservableList<ClsProductos> producList = FXCollections.observableArrayList();
+
 
 
             //Panel registrar inventario-------------------------------------------------------------------------------------
@@ -1062,16 +1065,16 @@ public class HomeCont implements Initializable {
         }
 
             if (registro == true){
-    
+
                 switch (btn_regist_provee.getText()){
                     case "Registrar":
                         try {
-    
+
                             Conexion cn = new Conexion();
                             cn.conexion();
                             String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
                             PreparedStatement ps = cn.conexion().prepareStatement(sql);
-    
+
                             ps.setString(1, empresa);
                             ps.setString(2, id);
                             ps.setString(3, nombre);
@@ -1079,23 +1082,23 @@ public class HomeCont implements Initializable {
                             ps.setString(5, telefono);
                             ps.setString(6, direccion);
                             ps.executeUpdate();
-    
+
                             refreshTableProvee();
-    
+
                             System.out.println("Datos Agregados correctamente");
-    
+
                         } catch (Exception e){
                             System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
                         }
-    
+
                         break;
-    
+
                     case "Actualizar":
 
                         String passId = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
-    
+
                         try {
-    
+
                             Conexion cn = new Conexion();
                             cn.conexion();
                             String sql = "UPDATE  proveedor SET " +
@@ -1107,7 +1110,7 @@ public class HomeCont implements Initializable {
                                     ",codigo = ?" +
                                     " WHERE codigo = ?";
                             PreparedStatement ps = cn.conexion().prepareStatement(sql);
-    
+
                             ps.setString(1, empresa);
                             ps.setString(2, nombre);
                             ps.setString(3, correo);
@@ -1116,23 +1119,23 @@ public class HomeCont implements Initializable {
                             ps.setString(6, id);
                             ps.setString(7,passId);
                             ps.executeUpdate();
-    
+
                             refreshTableProvee();
-    
+
                             System.out.println("Datos Actualizados correctamente");
-    
+
                         } catch (Exception e){
                             System.out.println("Error al ACTUALIZAR el proveedor en la base de datos" + e.getMessage());
                         }
-    
+
                         break;
-    
+
                     default: System.out.println("No se REGISTRO ni se ACTUALIZO los datos");
-    
+
                 }
                 cleanProvee();
                 madre.getSelectionModel().select(proveedores);
-    
+
             }else {
                 System.out.println("Error PROVEEDOR no registrado por falta de datos.");
             }
@@ -1260,7 +1263,15 @@ public class HomeCont implements Initializable {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
-                filtro_out_usr.setText(rs.getString("nombre"));
+
+                if (!filtro_in_usr.getText().equals("")) {
+
+                    filtro_out_usr.setText(rs.getString("nombre"));
+
+                } else {
+                    filtro_out_usr.setText("");
+                }
+
             } else {
                 filtro_out_usr.setText("");
             }
@@ -1277,6 +1288,33 @@ public class HomeCont implements Initializable {
     public void accionFiltrodUsr(){
 
         filtro_in_usr.setText(filtro_out_usr.getText());
+
+        try {
+
+            Conexion cn = new Conexion();
+            String sql = "SELCT * FROM usuarios";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+
+                /*usuarioList.addAll(new ClsUsuarios(
+                        rs.getString("id"),
+                        rs.getString("nombreUsuario"),
+                        rs.getString("password"),
+                        rs.getString("nombre"),
+                        rs.getString("correo"),
+                        rs.getString("rol"),
+                        rs.getString("Telefono")
+                ));*/
+
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado");
+        }
+
+
 
     }
 
