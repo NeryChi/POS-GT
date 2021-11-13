@@ -5,11 +5,11 @@ public class ClsProductos {
     String id;
     String nombre;
     String empresaProveedor;
-    double precio_unitario;
-    int cantidad;
+    String precio_unitario;
+    String cantidad;
     String descripcion;
 
-    public ClsProductos(String id, String nombre, String empresaProveedor, double precio_unitario, int cantidad, String descripcion) {
+    public ClsProductos(String id, String nombre, String empresaProveedor, String precio_unitario, String cantidad, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.empresaProveedor = empresaProveedor;
@@ -42,19 +42,19 @@ public class ClsProductos {
         this.empresaProveedor = empresaProveedor;
     }
 
-    public double getPrecio_unitario() {
+    public String getPrecio_unitario() {
         return precio_unitario;
     }
 
-    public void setPrecio_unitario(double precio_unitario) {
+    public void setPrecio_unitario(String precio_unitario) {
         this.precio_unitario = precio_unitario;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -65,6 +65,4 @@ public class ClsProductos {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
 }

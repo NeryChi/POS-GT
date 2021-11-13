@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,9 +16,11 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class HomeCont implements Initializable {
+
 
 
     //Panel izquierdo--------------------------------------------------------------------------------------------------
@@ -38,7 +39,30 @@ public class HomeCont implements Initializable {
     private Tab usuarios;
 
    @FXML
-    private Button btn_agreg_usr;
+    private Button btn_delete_usr, btn_edit_usr, btn_agreg_usr;
+
+   @FXML
+   private TableView<ClsUsuarios> tbl_usuarios;
+
+   @FXML
+   private TableColumn<ClsUsuarios, String> col_id_usr;
+
+    @FXML
+    private TableColumn<ClsUsuarios, String> col_name_usr;
+
+    @FXML
+    private TableColumn<ClsUsuarios, String> col_usr_usr;
+
+    @FXML
+    private TableColumn<ClsUsuarios, String> col_email_usr;
+
+    @FXML
+    private TableColumn<ClsUsuarios, String> col_tel_usr;
+
+    @FXML
+    private TableColumn<ClsUsuarios, String> col_rol_usr;
+
+    ObservableList<ClsUsuarios> userList = FXCollections.observableArrayList();
 
    @FXML
    private TextField filtro_in_usr, filtro_out_usr;
@@ -131,10 +155,28 @@ public class HomeCont implements Initializable {
     private Tab historial;
 
     @FXML
-    private Button btn_edit_hist;
+    private Button btn_delete_hist, btn_td_hist;
 
     @FXML
-    private Button btn_cancel_hist;
+    private TableView<ClsHistorial> tbl_historial;
+
+    @FXML
+    private TableColumn<ClsHistorial, String> col_id_hist;
+
+    @FXML
+    private TableColumn<ClsHistorial, String>col_name_hist;
+
+    @FXML
+    private TableColumn<ClsHistorial, String>col_dir_hist;
+
+    @FXML
+    private TableColumn<ClsHistorial, String>col_nit_hist;
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_total_hist;
+
+    ObservableList<ClsHistorial> histList = FXCollections.observableArrayList();
+
 
     //--------------------------------------------FIN historial---------------------------------------------------------
 
@@ -165,14 +207,12 @@ public class HomeCont implements Initializable {
     private TableColumn<ClsProductos, String> col_descri_invent;
 
     @FXML
-    private TableColumn<ClsProductos, Integer> col_cant_invent;
+    private TableColumn<ClsProductos, String> col_cant_invent;
 
     @FXML
-    private TableColumn<ClsProductos, Double> col_precio_invent;
+    private TableColumn<ClsProductos, String> col_precio_invent;
 
     ObservableList<ClsProductos> producList = FXCollections.observableArrayList();
-    ObservableList<ClsEmpresas> idProList = FXCollections.observableArrayList();
-
 
 
             //Panel registrar inventario-------------------------------------------------------------------------------------
@@ -187,7 +227,7 @@ public class HomeCont implements Initializable {
             private TextField txf_id_invent;
 
             @FXML
-            private ComboBox<String> cbx_idp_invent;
+            private ComboBox<ClsEmpresas> cbx_idp_invent;
 
             @FXML
             private TextField txf_prec_invent;
@@ -271,8 +311,6 @@ public class HomeCont implements Initializable {
 
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -283,6 +321,11 @@ public class HomeCont implements Initializable {
         filtro_in_usr.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         loadTableProduc();
         loadTableProvee();
+        loadTableHist();
+        loadTableUser();
+
+        fillEmpresa();
+
     }
 
 
@@ -290,6 +333,7 @@ public class HomeCont implements Initializable {
 
     public void irAggUsuario(){
 
+        btn_acept_usr.setText("Registrar");
         cbx_rol_usr.setPromptText("");
         madre.getSelectionModel().select(agregar_usuario);
     }
@@ -367,26 +411,69 @@ public class HomeCont implements Initializable {
 
         if (registrar == true){
 
-            try{
+            switch (btn_acept_usr.getText()){
+                case "Registrar":
+                    try{
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "insert into usuarios(id, nombreUsuario, password, nombre, correo, rol, telefono) values(?,?,?,?,?,?,?)";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
 
-                Conexion cn = new Conexion();
-                cn.conexion();
-                String sql = "insert into usuarios(id, nombreUsuario, password, nombre, correo, rol, telefono) values(?,?,?,?,?,?,?)";
-                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+                        ps.setString(1, id);
+                        ps.setString(2, usuario);
+                        ps.setString(3, password);
+                        ps.setString(4, nombre);
+                        ps.setString(5, correo);
+                        ps.setInt(6, rol_num);
+                        ps.setString(7, telefono);
+                        ps.executeUpdate();
 
-                ps.setString(1, id);
-                ps.setString(2, usuario);
-                ps.setString(3, password);
-                ps.setString(4, nombre);
-                ps.setString(5, correo);
-                ps.setInt(6, rol_num);
-                ps.setString(7, telefono);
-                ps.executeUpdate();
+                        System.out.println("Datos Agregados correctamente");
+                        loadTableUser();
 
-                System.out.println("Datos Agregados correctamente");
+                    } catch (Exception e){
+                        System.out.println("Error al registrer el usuraio en la base de datos" + e.getMessage());
+                    }
+                    break;
 
-            } catch (Exception e){
-                System.out.println("Error al registrer el usuraio en la base de datos" + e.getMessage());
+                case "Actualizar":
+
+                    String passId = tbl_usuarios.getSelectionModel().getSelectedItem().id;
+
+                    try {
+
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "UPDATE  usuarios SET " +
+                                "id = ?" +
+                                ",nombreUsuario = ?" +
+                                ",password = ?" +
+                                ",nombre = ?" +
+                                ",correo = ?" +
+                                ",rol = ?" +
+                                ",telefono = ?" +
+                                "WHERE id=?";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                        ps.setString(1, id);
+                        ps.setString(2, usuario);
+                        ps.setString(3, password);
+                        ps.setString(4, nombre);
+                        ps.setString(5, correo);
+                        ps.setInt(6, rol_num);
+                        ps.setString(7, telefono);
+                        ps.setString(8, passId);
+                        ps.executeUpdate();
+
+
+                        System.out.println("Datos Actualizados correctamente");
+                        loadTableUser();
+
+                    } catch (Exception e){
+                        System.out.println("Error al ACTUALIZAR el usuario en la base de datos" + e.getMessage());
+                    }
+                    break;
+
             }
 
             txf_id_usr.setText("");
@@ -423,6 +510,105 @@ public class HomeCont implements Initializable {
         madre.getSelectionModel().select(usuarios);
     }
 
+    //Eliminar un dato de la tabla USER
+
+    public void deleteUser(){
+
+        try {
+            //Llamo el item selecionado en la tabla de provedores en este caso el codigo el cual lo usare para buscarlo y eliminarlo
+
+            String deletUser = tbl_usuarios.getSelectionModel().getSelectedItem().id;
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "DELETE FROM `usuarios` WHERE id = " + "'" + deletUser + "'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ps.execute();
+
+            loadTableUser();
+
+            System.out.println("Dato eliminado exitosamente");
+
+        }catch (Exception e){
+
+            System.out.println("Error al Eliminar el dato en la base de datos" + e.getMessage());
+
+        }
+    }
+
+    //Recargar la tabla del USER
+    public void refreshTableUsr(){
+
+        try {
+
+            userList.clear();
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "SELECT * FROM usuarios";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                userList.addAll( new ClsUsuarios(
+                        rs.getString("id"),
+                        rs.getString("nombreUsuario"),
+                        rs.getString("nombre"),
+                        rs.getString("correo"),
+                        rs.getString("rol"),
+                        rs.getString("telefono")
+                ));
+            }
+
+        }catch (Exception e){
+
+            System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
+
+        }
+    }
+
+    private void loadTableUser(){
+
+        refreshTableUsr();
+
+        col_id_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("id"));
+        col_usr_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("nombreUsuario"));
+        col_name_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("nombre"));
+        col_email_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("correo"));
+        col_rol_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("rol"));
+        col_tel_usr.setCellValueFactory(new PropertyValueFactory<ClsUsuarios, String>("telefono"));
+
+        tbl_usuarios.setItems(userList);
+
+    }
+
+    public void passUser(){
+
+        String passId = tbl_usuarios.getSelectionModel().getSelectedItem().id;
+        txf_id_usr.setText(passId);
+
+        String passUsr = tbl_usuarios.getSelectionModel().getSelectedItem().nombreUsuario;
+        txf_nameusr_usr.setText(passUsr);
+
+        String passName = tbl_usuarios.getSelectionModel().getSelectedItem().nombre;
+        txf_name_usr.setText(passName);
+
+        String passEmail = tbl_usuarios.getSelectionModel().getSelectedItem().correo;
+        txf_email_usr.setText(passEmail);
+
+        String passTel = tbl_usuarios.getSelectionModel().getSelectedItem().telefono;
+        txf_tel_usr.setText(passTel);
+
+
+        btn_acept_usr.setText("Actualizar");
+        madre.getSelectionModel().select(agregar_usuario);
+
+    }
+
+
+
+
+
     //Metodos venta----------------------------------------------------------------------------------------------------
 
     public void irAggVenta(){ madre.getSelectionModel().select(registro_venta);}
@@ -441,28 +627,28 @@ public class HomeCont implements Initializable {
         madre.getSelectionModel().select(historial);
     }
 
-    //Metodos inventario-----------------------------------------------------------------------------------------------
-    //Metodos inventario-----------------------------------------------------------------------------------------------
-    //Metodos inventario-----------------------------------------------------------------------------------------------
-    //Metodos inventario-----------------------------------------------------------------------------------------------
-    //Metodos inventario-----------------------------------------------------------------------------------------------
 
-
-    //TRAE EL ID DEL PROVEEDOR Y TAMBIEN NOMBRE DE LA EMPRESA
-    public void idProveedor() {
+    //Recargar la tabla del Historial
+    public void refreshTableHist(){
 
         try {
 
-            idProList.clear();
+            histList.clear();
 
             Conexion cn = new Conexion();
             cn.conexion();
-            String sql = "SELECT empresa FROM proveedor";
+            String sql = "SELECT * FROM ventas";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
-                idProList.addAll(new ClsEmpresas(rs.getString("empresa")));
+                histList.addAll(new ClsHistorial(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("direccion"),
+                        rs.getString("nit"),
+                        rs.getString("total")
+                ));
             }
 
         }catch (Exception e){
@@ -470,17 +656,91 @@ public class HomeCont implements Initializable {
             System.out.println("Error al Solicitar en la base de datos" + e.getMessage());
 
         }
+    }
+
+    //Cargar la tabla de Historial
+    public void loadTableHist(){
+
+        refreshTableHist();
+
+        col_id_hist.setCellValueFactory(new PropertyValueFactory<ClsHistorial, String>("id"));
+        col_name_hist.setCellValueFactory(new PropertyValueFactory<ClsHistorial, String>("nombre"));
+        col_dir_hist.setCellValueFactory(new PropertyValueFactory<ClsHistorial, String>("direccion"));
+        col_nit_hist.setCellValueFactory(new PropertyValueFactory<ClsHistorial, String>("nit"));
+        col_total_hist.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("total"));
+
+        tbl_historial.setItems(histList);
+    }
+
+    //Eliminar un dato de la tabla historial (Es puro relleno)
+
+    public void deleteHist(){
+
+        try {
+            //Llamo el item selecionado en la tabla de provedores en este caso el codigo el cual lo usare para buscarlo y eliminarlo
+
+            String deletHist = tbl_historial.getSelectionModel().getSelectedItem().id;
+
+            Conexion cn = new Conexion();
+            cn.conexion();
+            String sql = "DELETE FROM `ventas` WHERE id = " + "'" + deletHist + "'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ps.execute();
+
+            loadTableHist();
+
+            System.out.println("Dato eliminado exitosamente");
+
+        }catch (Exception e){
+
+            System.out.println("Error al Eliminar el dato en la base de datos" + e.getMessage());
+
+        }
+    }
+
+
+
+
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+    //Metodos inventario-----------------------------------------------------------------------------------------------
+
+
+    //Llama al metodo de consulta de empresas y las llena en el comboBox
+    public void fillEmpresa(){
+        ClsEmpresas e = new ClsEmpresas();
+
+        ObservableList<ClsEmpresas> obsEmpresa = e.getEmpresaList();
+
+        cbx_idp_invent.setItems(obsEmpresa);
 
     }
 
     public void irAggProduc(){
-        idProveedor();
+
+        btn_regist_invet.setText("Registrar");
         cleanProduc();
+        fillEmpresa();
         madre.getSelectionModel().select(registrar_producto);
     }
 
     public void cleanProduc(){
 
+        txf_id_invent.setText("");
+        txf_name_invent.setText("");
+        cbx_idp_invent.getSelectionModel().clearSelection();
+        txf_prec_invent.setText("");
+        txf_cant_invent.setText("");
+        txf_descri_invent.setText("");
+
+        txf_id_invent.setPromptText("");
+        txf_name_invent.setPromptText("");
+        cbx_idp_invent.setPromptText("");
+        txf_prec_invent.setPromptText("");
+        txf_cant_invent.setPromptText("");
+        txf_descri_invent.setPromptText("");
 
     }
 
@@ -488,10 +748,12 @@ public class HomeCont implements Initializable {
         boolean registroPro = true;
         String id = txf_id_invent.getText();
         String nombre = txf_name_invent.getText();
-        String idp = cbx_idp_invent.getSelectionModel().getSelectedItem();
+        ClsEmpresas idp = cbx_idp_invent.getSelectionModel().getSelectedItem();
         String prec = txf_prec_invent.getText();
         String cant = txf_cant_invent.getText();
         String descri = txf_descri_invent.getText();
+
+        System.out.println(idp);
 
         if (id.equals("")) {
             txf_id_invent.setPromptText("Por favor llene el campo CÓDIGO");
@@ -526,30 +788,76 @@ public class HomeCont implements Initializable {
 
         if (registroPro == true){
 
-            try {
-                Conexion cn = new Conexion();
-                cn.conexion();
-                String sql = "insert into productos(id, nombre, empresaProveedor, precio_unitario, cantidad, descripcion) values(?,?,?,?,?,?)";
-                PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            switch (btn_regist_invet.getText()){
+                case "Registrar":
 
-                ps.setString(1, id);
-                ps.setString(2, nombre);
-                ps.setString(3, idp);
-                ps.setString(4, prec);
-                ps.setString(5, cant);
-                ps.setString(6, descri);
-                ps.executeUpdate();
-                System.out.println("Datos Agregados correctamente");
+                    try {
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "insert into productos(id, nombre, empresaProveedor, precio_unitario, cantidad, descripcion) values(?,?,?,?,?,?)";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
 
-                refreshTable();//RECARGA LA TABLA INVENTARIO
+                        ps.setString(1, id);
+                        ps.setString(2, nombre);
+                        ps.setString(3, String.valueOf(idp));
+                        ps.setString(4, prec);
+                        ps.setString(5, cant);
+                        ps.setString(6, descri);
+                        ps.executeUpdate();
+                        System.out.println("Datos Agregados correctamente");
 
-            }catch (Exception e){
+                        refreshTable();//RECARGA LA TABLA INVENTARIO
 
-                System.out.println("Error al registrar el producto en la base de datos" + e.getMessage());
+                    }catch (Exception e){
 
+                        System.out.println("Error al registrar el producto en la base de datos" + e.getMessage());
+
+                    }
+
+                    break;
+
+                case "Actualizar":
+
+                    String passId = tbl_inventario.getSelectionModel().getSelectedItem().id;
+
+                    try {
+
+                        Conexion cn = new Conexion();
+                        cn.conexion();
+                        String sql = "UPDATE  productos SET " +
+                                "nombre = ?" +
+                                ",empresaProveedor = ?" +
+                                ",precio_unitario = ?" +
+                                ",cantidad = ?" +
+                                ",descripcion = ?" +
+                                ",id = ?" +
+                                "WHERE id=?";
+                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
+
+                        ps.setString(1, nombre);
+                        ps.setString(2, String.valueOf(idp));
+                        ps.setString(3, prec);
+                        ps.setString(4, cant);
+                        ps.setString(5, descri);
+                        ps.setString(6, id);
+                        ps.setString(7, passId);
+                        ps.executeUpdate();
+
+                        refreshTableProvee();
+
+                        System.out.println("Datos Actualizados correctamente");
+
+                    } catch (Exception e){
+                        System.out.println("Error al ACTUALIZAR el proveedor en la base de datos" + e.getMessage());
+                    }
+
+                    break;
+
+                default: System.out.println("No se REGISTRO ni se ACTUALIZO los datos");
             }
 
             cleanProduc();
+            loadTableProduc();
             madre.getSelectionModel().select(inventario);
 
         }else {
@@ -558,6 +866,7 @@ public class HomeCont implements Initializable {
     }
 
     public void irInvent(){
+        loadTableProduc();
         madre.getSelectionModel().select(inventario);
     }
 
@@ -579,8 +888,8 @@ public class HomeCont implements Initializable {
                         rs.getString("id"),
                         rs.getString("nombre"),
                         rs.getString("empresaProveedor"),
-                        rs.getDouble("precio_unitario"),
-                        rs.getInt("cantidad"),
+                        rs.getString("precio_unitario"),
+                        rs.getString("cantidad"),
                         rs.getString("descripcion")
                 ));
 
@@ -604,8 +913,9 @@ public class HomeCont implements Initializable {
         col_name_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("nombre"));
         col_pro_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("empresaProveedor"));
         col_descri_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("descripcion"));
-        col_cant_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, Integer>("cantidad"));
-        col_precio_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, Double>("precio_unitario"));
+        col_cant_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("cantidad"));
+        col_precio_invent.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("precio_unitario"));
+
 
         tbl_inventario.setItems(producList);
 
@@ -618,15 +928,15 @@ public class HomeCont implements Initializable {
         try {
             //Llamo el item selecionado en la tabla de provedores en este caso el codigo el cual lo usare para buscarlo y eliminarlo
 
-            String deletPro = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
+            String deletInv = tbl_inventario.getSelectionModel().getSelectedItem().id;
 
             Conexion cn = new Conexion();
             cn.conexion();
-            String sql = "DELETE FROM `proveedor` WHERE codigo = " + "'" + deletPro + "'";
+            String sql = "DELETE FROM `productos` WHERE id = " + "'" + deletInv + "'";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ps.execute();
 
-            refreshTableProvee();
+            loadTableProduc();
 
             System.out.println("Dato eliminado exitosamente");
 
@@ -637,6 +947,31 @@ public class HomeCont implements Initializable {
         }
 
     }
+
+    public void passProduc(){
+
+        String passId = tbl_inventario.getSelectionModel().getSelectedItem().id;
+        txf_id_invent.setText(passId);
+
+        String passName = tbl_inventario.getSelectionModel().getSelectedItem().nombre;
+        txf_name_invent.setText(passName);
+
+        String passPre = tbl_inventario.getSelectionModel().getSelectedItem().precio_unitario;
+        txf_prec_invent.setText(passPre);
+
+        String passCant = tbl_inventario.getSelectionModel().getSelectedItem().cantidad;
+        txf_cant_invent.setText(passCant);
+
+        String passDescri = tbl_inventario.getSelectionModel().getSelectedItem().descripcion;
+        txf_descri_invent.setText(passDescri);
+
+        btn_regist_invet.setText("Actualizar");
+        fillEmpresa();
+
+        madre.getSelectionModel().select(registrar_producto);
+
+    }
+
 
 
     //--------------------------------------------FIN de inventario--------------------------------------------------------
@@ -723,78 +1058,81 @@ public class HomeCont implements Initializable {
 
         }
 
-        if (registro == true){
+            if (registro == true){
+    
+                switch (btn_regist_provee.getText()){
+                    case "Registrar":
+                        try {
+    
+                            Conexion cn = new Conexion();
+                            cn.conexion();
+                            String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
+                            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+    
+                            ps.setString(1, empresa);
+                            ps.setString(2, id);
+                            ps.setString(3, nombre);
+                            ps.setString(4, correo);
+                            ps.setString(5, telefono);
+                            ps.setString(6, direccion);
+                            ps.executeUpdate();
+    
+                            refreshTableProvee();
+    
+                            System.out.println("Datos Agregados correctamente");
+    
+                        } catch (Exception e){
+                            System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
+                        }
+    
+                        break;
+    
+                    case "Actualizar":
 
-            switch (btn_regist_provee.getText()){
-                case "Registrar":
-                    try {
-
-                        Conexion cn = new Conexion();
-                        cn.conexion();
-                        String sql = "insert into proveedor(empresa, codigo, encargado, correo, telefono, direccion) values(?,?,?,?,?,?)";
-                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
-
-                        ps.setString(1, empresa);
-                        ps.setString(2, id);
-                        ps.setString(3, nombre);
-                        ps.setString(4, correo);
-                        ps.setString(5, telefono);
-                        ps.setString(6, direccion);
-                        ps.executeUpdate();
-
-                        refreshTableProvee();
-
-                        System.out.println("Datos Agregados correctamente");
-
-                    } catch (Exception e){
-                        System.out.println("Error al registrer el proveedor en la base de datos" + e.getMessage());
-                    }
-
-                    break;
-
-                case "Actualizar":
-
-
-                    try {
-
-                        Conexion cn = new Conexion();
-                        cn.conexion();
-                        String sql = "UPDATE  proveedor SET " +
-                                "empresa = ?" +
-                                ",encargado = ?" +
-                                ",correo = ?" +
-                                ",telefono = ?" +
-                                ",direccion = ?" +
-                                "WHERE codigo=?";
-                        PreparedStatement ps = cn.conexion().prepareStatement(sql);
-
-                        ps.setString(1, empresa);
-                        ps.setString(2, nombre);
-                        ps.setString(3, correo);
-                        ps.setString(4, telefono);
-                        ps.setString(5, direccion);
-                        ps.setString(6, id);
-                        ps.executeUpdate();
-
-                        refreshTableProvee();
-
-                        System.out.println("Datos Actualizados correctamente");
-
-                    } catch (Exception e){
-                        System.out.println("Error al ACTUALIZAR el proveedor en la base de datos" + e.getMessage());
-                    }
-
-                    break;
-
-                default: System.out.println("No se REGISTRO ni se ACTUALIZO los datos");
-
+                        String passId = tbl_proveedores.getSelectionModel().getSelectedItem().codigo;
+    
+                        try {
+    
+                            Conexion cn = new Conexion();
+                            cn.conexion();
+                            String sql = "UPDATE  proveedor SET " +
+                                    "empresa = ?" +
+                                    ",encargado = ?" +
+                                    ",correo = ?" +
+                                    ",telefono = ?" +
+                                    ",direccion = ?" +
+                                    ",codigo = ?" +
+                                    " WHERE codigo = ?";
+                            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+    
+                            ps.setString(1, empresa);
+                            ps.setString(2, nombre);
+                            ps.setString(3, correo);
+                            ps.setString(4, telefono);
+                            ps.setString(5, direccion);
+                            ps.setString(6, id);
+                            ps.setString(7,passId);
+                            ps.executeUpdate();
+    
+                            refreshTableProvee();
+    
+                            System.out.println("Datos Actualizados correctamente");
+    
+                        } catch (Exception e){
+                            System.out.println("Error al ACTUALIZAR el proveedor en la base de datos" + e.getMessage());
+                        }
+    
+                        break;
+    
+                    default: System.out.println("No se REGISTRO ni se ACTUALIZO los datos");
+    
+                }
+                cleanProvee();
+                madre.getSelectionModel().select(proveedores);
+    
+            }else {
+                System.out.println("Error PROVEEDOR no registrado por falta de datos.");
             }
-            cleanProvee();
-            madre.getSelectionModel().select(proveedores);
-
-        }else {
-            System.out.println("Error PROVEEDOR no registrado por falta de datos.");
-        }
 
     }
 
@@ -828,7 +1166,6 @@ public class HomeCont implements Initializable {
                 ));
 
             }
-
 
         }catch (Exception e){
 
@@ -868,7 +1205,7 @@ public class HomeCont implements Initializable {
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ps.execute();
 
-            refreshTableProvee();
+            loadTableProvee();
 
             System.out.println("Dato eliminado exitosamente");
 
@@ -902,7 +1239,6 @@ public class HomeCont implements Initializable {
         txf_dir_provee.setText(passDir);
 
         btn_regist_provee.setText("Actualizar");
-        txf_id_provee.setEditable(false);
 
         madre.getSelectionModel().select(registrar_proveedor);
 
