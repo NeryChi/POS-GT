@@ -1429,6 +1429,40 @@ public class HomeCont implements Initializable {
     }
 
 
+    // Estos metodos son utilizados para filtro_out_inv2 y filtro_in_inv2
+    @FXML
+    private TextField filtro_out_inv2, filtro_in_inv2;
+
+    public void filtroInInv2(){
+
+        try {
+
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_in_inv2.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()){
+
+                if (!filtro_in_inv2.getText().equals("")) {
+
+                    filtro_out_inv2.setText(rs.getString("nombre"));
+
+                } else {
+                    filtro_out_inv2.setText("");
+                }
+
+            } else {
+                filtro_out_inv2.setText("");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al filtrar la busqueda" + e.getMessage());
+        }
+    }
+
+
+
     public void accionInv(){
 
         try {
@@ -1448,6 +1482,44 @@ public class HomeCont implements Initializable {
                         rs.getString("cantidad"),
                         rs.getString("descripcion")
                 ));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
+        }
+        filtro_in_inv.setText("");
+    }
+
+
+    public void accionInv2(){
+
+        try {
+
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_out_inv2.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                String passId = rs.getString("id");
+                txf_id_invent.setText(passId);
+
+                String passName = rs.getString("nombre");
+                txf_name_invent.setText(passName);
+
+                String passPre = rs.getString("precio_unitario");
+                txf_prec_invent.setText(passPre);
+
+                String passCant = rs.getString("cantidad");
+                txf_cant_invent.setText(passCant);
+
+                String passDescri = rs.getString("descripcion");
+                txf_descri_invent.setText(passDescri);
+
+                btn_regist_invet.setText("Actualizar");
+                fillEmpresa();
+
             }
 
         } catch (Exception e){
