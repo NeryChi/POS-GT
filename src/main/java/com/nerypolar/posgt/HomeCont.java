@@ -1258,9 +1258,6 @@ public class HomeCont implements Initializable {
     }
 
 
-
-
-
     /* Inicia Filtro de busquedas************************************************************************************************************
     *****************************************************************************************************************************************/
 
@@ -1296,6 +1293,7 @@ public class HomeCont implements Initializable {
         }
 
     }
+
 
     public void accionUsr(){
 
@@ -1364,11 +1362,13 @@ public class HomeCont implements Initializable {
     private TableColumn<ClsProductos, String> col_id_nuevo, col_name_nuevo, col_pro_nuevo, col_descri_nuevo, col_cant_nuevo, col_precio_nuevo;
     private TableView<ClsProductos> tbl_nuevo;
 
+    ObservableList<ClsProductos> nuevoList = FXCollections.observableArrayList();
+
     public void accionNuev(){
 
         try {
 
-            producList.clear();
+
             cn.conexion();
             String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_out_nuev.getText()+ "%'";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
@@ -1376,7 +1376,7 @@ public class HomeCont implements Initializable {
 
             if (rs.next()){
 
-                producList.addAll( new ClsProductos(
+                nuevoList.addAll( new ClsProductos(
                         rs.getString("id"),
                         rs.getString("nombre"),
                         rs.getString("empresaProveedor"),
@@ -1385,12 +1385,20 @@ public class HomeCont implements Initializable {
                         rs.getString("descripcion")
                 ));
 
+
+
             }
+
+            col_id_nuevo.setCellValueFactory(new PropertyValueFactory<ClsProductos, String>("id"));
+
+            tbl_nuevo.setItems(nuevoList);
 
         } catch (Exception e){
             System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
         }
         filtro_in_nuev.setText("");
+        System.out.println(nuevoList);
+
     }
 
 

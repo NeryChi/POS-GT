@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="POS-GT" target="17" />
+      <module name="POS-GT" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
