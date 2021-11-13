@@ -3,6 +3,7 @@
 }
 
 .filtro_in{
+    -fx-background-color: Transparent;
     -fx-border-color: #292B39;
     -fx-border-radius: 17em 0em 0em 17em;
     -fx-font-size: 13px;
@@ -10,11 +11,15 @@
 }
 
 .filtro_out{
+    -fx-pref-height: 30;
+    -fx-pref-width: 770;
+    -fx-translate-y: 15px;
     -fx-background-color: #ffff;
     -fx-border-color: #292B39;
     -fx-border-radius: 17em 0em 0em 17em;
     -fx-background-radius: 17em 0em 0em 17em;
     -fx-font-size: 13px;
+
 }
 
 .brd_redondo_rigth{
