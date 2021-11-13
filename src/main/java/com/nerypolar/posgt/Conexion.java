@@ -8,7 +8,7 @@ public class Conexion {
     private Connection connection;
     private String usuario = "sql5450305";
     private String password = "8SJQzUmE7X";
-    private String url = "jdbc:mysql://sql5.freesqldatabase.com:3306/sql5450305";
+    private String url = "jdbc:mysql://192.168.1.102:3306/sql5450305";
     private String driver = "com.mysql.cj.jdbc.Driver";
 
     public Connection conexion(){

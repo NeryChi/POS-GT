@@ -88,6 +88,8 @@ public class HomeCont implements Initializable {
             @FXML
             private Button btn_cancel_usr;
 
+    ObservableList<ClsProductos> usuarioList = FXCollections.observableArrayList();
+
     //--------------------------------------------FIN de usuario--------------------------------------------------------
 
 
@@ -795,164 +797,6 @@ public class HomeCont implements Initializable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void inputFiltroUsr(){
 
         try {
@@ -965,7 +809,15 @@ public class HomeCont implements Initializable {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
-                filtro_out_usr.setText(rs.getString("nombre"));
+
+                if (!filtro_in_usr.getText().equals("")) {
+
+                    filtro_out_usr.setText(rs.getString("nombre"));
+
+                } else {
+                    filtro_out_usr.setText("");
+                }
+
             } else {
                 filtro_out_usr.setText("");
             }
@@ -982,6 +834,33 @@ public class HomeCont implements Initializable {
     public void accionFiltrodUsr(){
 
         filtro_in_usr.setText(filtro_out_usr.getText());
+
+        try {
+
+            Conexion cn = new Conexion();
+            String sql = "SELCT * FROM usuarios";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+
+                /*usuarioList.addAll(new ClsUsuarios(
+                        rs.getString("id"),
+                        rs.getString("nombreUsuario"),
+                        rs.getString("password"),
+                        rs.getString("nombre"),
+                        rs.getString("correo"),
+                        rs.getString("rol"),
+                        rs.getString("Telefono")
+                ));*/
+
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado");
+        }
+
+
 
     }
 

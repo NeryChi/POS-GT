@@ -51,8 +51,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="895.0">
                      <children>
-                        <TextField fx:id="filtro_out_usr" editable="false" styleClass="filtro_out" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
-                        <TextField fx:id="filtro_in_usr" onAction="#accionFiltrodUsr" onKeyTyped="#inputFiltroUsr" styleClass="filtro_in" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="filtro_out_usr" editable="false" prefHeight="30.0" prefWidth="770.0" styleClass="filtro_out" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="filtro_in_usr" onAction="#accionFiltrodUsr" onKeyTyped="#inputFiltroUsr" prefHeight="30.0" prefWidth="770.0" styleClass="filtro_in" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
                         <Button layoutX="801.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="brd_redondo_rigth" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
                            <graphic>
                               <Label prefHeight="20.0" prefWidth="20.0" styleClass="lupa" />
