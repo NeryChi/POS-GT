@@ -63,20 +63,6 @@ public class LogInCont implements Initializable {
 
                 if (valido == true) {
 
-                    Conexion cn = new Conexion();
-                    cn.conexion();
-
-                    String ro = rs.getString("nombreUsuario");
-                    String rop = rs.getString("password");
-                    String rou = rs.getString("rol");
-
-                    sql = "INSERT INTO `inicio`(`usr`, `pass`, `rol`) VALUES (?, ?, ?)";
-                    PreparedStatement ps = cn.conexion().prepareStatement(sql);
-
-                    ps.setString(1, ro);
-                    ps.setString(2, rop);
-                    ps.setString(3, rou);
-                    ps.executeUpdate();
 
                     System.out.println("Acceso concedido");
                     close();
@@ -119,15 +105,9 @@ public class LogInCont implements Initializable {
     Stage stage;
 
     public void close(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("Cerrando Sesion!");
-        alert.setContentText("Estas seguro que deseas cerrar cerrar session?");
 
-        if(alert.showAndWait().get() == ButtonType.OK){
          stage = (Stage) lienzo.getScene().getWindow();
-         System.out.println("Ventana Cerrada");
+;
          stage.close();
         }
     }
-}
