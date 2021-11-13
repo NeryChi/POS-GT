@@ -490,7 +490,7 @@ public class HomeCont implements Initializable {
         }
     }
 
-
+    //Ir a la pestaña inicio de usuario
     public void irUsuario(){
 
         txf_id_usr.setText("");
