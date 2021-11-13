@@ -567,6 +567,8 @@ public class HomeCont implements Initializable {
         }
     }
 
+
+    //Rellenar la tabla usuarios
     private void loadTableUser(){
 
         refreshTableUsr();
@@ -582,6 +584,7 @@ public class HomeCont implements Initializable {
 
     }
 
+    //Pasar los datos del la tabla a los campos de registro
     public void passUser(){
 
         String passId = tbl_usuarios.getSelectionModel().getSelectedItem().id;
