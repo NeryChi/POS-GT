@@ -4,12 +4,19 @@ package com.nerypolar.posgt;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import org.w3c.dom.events.Event;
 
 
 import java.net.URL;
@@ -21,7 +28,8 @@ import java.util.ResourceBundle;
 
 public class HomeCont implements Initializable {
 
-
+    // Se instancia un objeto para llmar la base de datos.
+    Conexion cn = new Conexion();
 
     //Panel izquierdo--------------------------------------------------------------------------------------------------
 
@@ -64,8 +72,6 @@ public class HomeCont implements Initializable {
 
     ObservableList<ClsUsuarios> userList = FXCollections.observableArrayList();
 
-   @FXML
-   private TextField filtro_in_usr, filtro_out_usr;
 
             //Panel agregar usuario-------------------------------------------------------------------------------------
 
@@ -97,7 +103,7 @@ public class HomeCont implements Initializable {
             private Button btn_acept_usr;
 
             @FXML
-            private Button btn_cancel_usr;
+            private Button btn_cancel_usr, btn_buscar_usr;
 
     ObservableList<ClsProductos> usuarioList = FXCollections.observableArrayList();
 
@@ -321,13 +327,14 @@ public class HomeCont implements Initializable {
         roles.addAll("Administrador","Vendedor");
         cbx_rol_usr.getItems().addAll(roles);
 
-        filtro_in_usr.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         loadTableProduc();
         loadTableProvee();
         loadTableHist();
         loadTableUser();
 
         fillEmpresa();
+
+
 
     }
 
@@ -1251,14 +1258,22 @@ public class HomeCont implements Initializable {
     }
 
 
-    public void inputFiltroUsr(){
+
+
+
+    /* Inicia Filtro de busquedas************************************************************************************************************
+    *****************************************************************************************************************************************/
+
+    // Estos metodos son utilizados para filtro_out_usr y filtro_in_usr
+    @FXML
+    private TextField filtro_in_usr, filtro_out_usr;
+
+    public void filtroInUsr(){
 
         try {
 
-            String texto = filtro_in_usr.getText();
-            Conexion cn = new Conexion();
             cn.conexion();
-            String sql = "SELECT * FROM usuarios WHERE nombre LIKE '%" +texto+ "%'";
+            String sql = "SELECT * FROM usuarios WHERE nombre LIKE '%" +filtro_in_usr.getText()+ "%'";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -1280,45 +1295,228 @@ public class HomeCont implements Initializable {
             System.out.println("Error al filtrar la busqueda" + e.getMessage());
         }
 
-        filtro_out_usr.setStyle("-fx-text-fill: Gray");
-        System.out.println("Teclazo");
-
     }
 
-    public void accionFiltrodUsr(){
-
-        filtro_in_usr.setText(filtro_out_usr.getText());
+    public void accionUsr(){
 
         try {
 
-            Conexion cn = new Conexion();
-            String sql = "SELCT * FROM usuarios";
+            userList.clear();
+            cn.conexion();
+            String sql = "SELECT * FROM usuarios WHERE nombre LIKE '%" +filtro_out_usr.getText()+ "%'";
             PreparedStatement ps = cn.conexion().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
-
-                /*usuarioList.addAll(new ClsUsuarios(
+                userList.addAll( new ClsUsuarios(
                         rs.getString("id"),
                         rs.getString("nombreUsuario"),
-                        rs.getString("password"),
                         rs.getString("nombre"),
                         rs.getString("correo"),
                         rs.getString("rol"),
-                        rs.getString("Telefono")
-                ));*/
+                        rs.getString("telefono")
+                ));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
+        }
+        filtro_in_usr.setText("");
+    }
+
+
+
+
+    // Estos metodos son utilizados para filtro_out_nuev y filtro_in_nuev
+    @FXML
+    private TextField filtro_out_nuev, filtro_in_nuev;
+
+    public void filtroInNuev() {
+
+        try {
+
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" + filtro_in_nuev.getText() + "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                if (!filtro_in_nuev.getText().equals("")) {
+
+                    filtro_out_nuev.setText(rs.getString("nombre"));
+
+                } else {
+                    filtro_out_nuev.setText("");
+                }
+
+            } else {
+                filtro_out_nuev.setText("");
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Error al filtrar la busqueda" + e.getMessage());
+        }
+    }
+
+    @FXML
+    private TableColumn<ClsProductos, String> col_id_nuevo, col_name_nuevo, col_pro_nuevo, col_descri_nuevo, col_cant_nuevo, col_precio_nuevo;
+    private TableView<ClsProductos> tbl_nuevo;
+
+    public void accionNuev(){
+
+        try {
+
+            producList.clear();
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_out_nuev.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()){
+
+                producList.addAll( new ClsProductos(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("empresaProveedor"),
+                        rs.getString("precio_unitario"),
+                        rs.getString("cantidad"),
+                        rs.getString("descripcion")
+                ));
 
             }
 
         } catch (Exception e){
-            System.out.println("Error al agregar a la tabla el elemento filtrado");
+            System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
         }
-
-
-
+        filtro_in_nuev.setText("");
     }
 
 
+
+
+    // Estos metodos son utilizados para filtro_out_inv y filtro_in_inv
+    @FXML
+    private TextField filtro_out_inv, filtro_in_inv;
+
+    public void filtroInInv(){
+
+        try {
+
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_in_inv.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()){
+
+                if (!filtro_in_inv.getText().equals("")) {
+
+                    filtro_out_inv.setText(rs.getString("nombre"));
+
+                } else {
+                    filtro_out_inv.setText("");
+                }
+
+            } else {
+                filtro_out_inv.setText("");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al filtrar la busqueda" + e.getMessage());
+        }
+    }
+
+
+    public void accionInv(){
+
+        try {
+
+            producList.clear();
+            cn.conexion();
+            String sql = "SELECT * FROM productos WHERE nombre LIKE '%" +filtro_out_inv.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                producList.addAll( new ClsProductos(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("empresaProveedor"),
+                        rs.getString("precio_unitario"),
+                        rs.getString("cantidad"),
+                        rs.getString("descripcion")
+                ));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
+        }
+        filtro_in_inv.setText("");
+    }
+
+
+
+
+    // Estos metodos son utilizados para filtro_out_prov y filtro_in_prov
+    @FXML
+    private TextField filtro_out_prov, filtro_in_prov;
+
+    public void filtroInProv(){
+
+        try {
+
+            cn.conexion();
+            String sql = "SELECT * FROM proveedor WHERE empresa LIKE '%" +filtro_in_prov.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()){
+
+                if (!filtro_in_prov.getText().equals("")) {
+
+                    filtro_out_prov.setText(rs.getString("empresa"));
+
+                } else {
+                    filtro_out_prov.setText("");
+                }
+
+            } else {
+                filtro_out_prov.setText("");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al filtrar la busqueda" + e.getMessage());
+        }
+    }
+
+    public void accionProv(){
+
+        try {
+
+            proveeList.clear();
+            cn.conexion();
+            String sql = "SELECT * FROM proveedor WHERE empresa LIKE '%" +filtro_out_prov.getText()+ "%'";
+            PreparedStatement ps = cn.conexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                proveeList.addAll( new ClsProveedores(
+                        rs.getString("empresa"),
+                        rs.getString("codigo"),
+                        rs.getString("encargado"),
+                        rs.getString("correo"),
+                        rs.getString("telefono"),
+                        rs.getString("direccion")
+                ));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al agregar a la tabla el elemento filtrado" + e.getMessage());
+        }
+        filtro_in_prov.setText("");
+    }
 }
 
 
